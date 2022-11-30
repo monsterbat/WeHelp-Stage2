@@ -4,10 +4,14 @@ Update date: 2022/11/30
 Authored by SC Siao 
 */
 
+body{
+    margin: 0; /* 不要留白 */
+}
 /* ***********************************************/
 /* ******************* Header ********************/
 /* ***********************************************/
 /* Header - need freeze on top */
+
 header{
     display: flex;
     position: sticky; /* freeze */
@@ -254,6 +258,7 @@ main{
     border-radius: 5px;
     cursor: pointer;
     border: 1px solid #E8E8E8;
+    text-decoration: none;
 }
 /* list3-1 */
 .fetchData .imageBlock .imageShow{
