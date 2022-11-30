@@ -62,6 +62,7 @@ def attractions():
 			data_image_ls=[]
 			data_image=[]
 			id_check=data["id"]
+			
 			# With keyword 
 			if keyword!=False:
 				sql_command="""
@@ -69,7 +70,7 @@ def attractions():
 				INNER JOIN attraction_image ON attraction.id=attraction_image.attraction_id
 				WHERE category LIKE %s AND attraction_id LIKE %s OR name LIKE %s AND attraction_id LIKE %s;
 				"""	
-				sql_input=("%"+keyword+"%",id_check,keyword,id_check)
+				sql_input=(keyword,id_check,"%"+keyword+"%",id_check)
 				attraction_img=query_data(sql_command,sql_input)
 			# WithOut keyword
 			else:

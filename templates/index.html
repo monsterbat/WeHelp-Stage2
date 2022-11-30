@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
+        <meta charset="utf-8" />
+        <title>Taipei Day Trip</title>
+        <link rel="stylesheet", type="text/css", href="../static/tpdt.css" />
+        <script src="../static/fetch.js" defer></script>        
+    </head>
+    <body>
+        <!-- header -->
+        <header class="topFreezeBackgroung">
+            <nav class="topTitle">
+                <p class="topLeftTitleText">
+                    台北一日遊
+                </p>
+                            
+                <div class="topRightOptions">
+                    <div class="topRightButton">
+                        <!-- <div calss="topRightButtonDesign" onclack=""> -->
+                            排定行程
+                        <!-- </div> -->
+                    </div>
+                    <div class="topRightButton">
+                        <!-- <div calss="topRightButtonDesign" onclack=""> -->
+                            登入/註冊
+                        <!-- </div> -->
+                    </div>  
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main image -->
+        <main>
+            <div class="mainImage">
+                <div class="mainImageAlign">
+                    <div class="mainImageAlignH1">
+                        輕鬆享受台北一日悠閒
+                    </div>
+                    <div class="mainImageAlignH2">
+                        探索每個角落，體驗城市的深度旅遊行程
+                    </div>
+                    <div class="mainImageSearchBar">                        
+                        <div class="searchBarInput">
+                            <input 
+                            type="text" 
+                            id="keyword" 
+                            placeholder="輸入景點名稱查詢"                            
+                            class="searchBarInputWord">
+                        </div>
+                        <div class="searchBarButton" onclick="pageReturn0();">
+                                <img src="../static/image/icon_search.png">
+                        </div>  
+                    </div>
+                    <div id="category0" class="catTable0">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fetch Attractions data -->
+            <div id="mainFetchData" class="mainFetchData">
+                <div id="fetchData" class="fetchData">
+                </div>
+            </div>
+        </main>
+        
+        <!-- footer -->
+        <footer>
+            <p>
+                COPYRIGHT © 2021 台北一日遊
+            </p>
+        </footer>               
+    </body>
+</html>

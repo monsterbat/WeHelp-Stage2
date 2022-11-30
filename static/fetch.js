@@ -1,5 +1,5 @@
 // WeHelp BootCamp Assignemt - Stage 2 taipei_day_trip -*- index fetch data js -*-
-// Update date: 2022/11/26
+// Update date: 2022/11/28
 // Authored by SC Siao
 
 // api URL
@@ -7,23 +7,22 @@
 let page = 0;
 let keyword = "";
 let domainAndPort=""
-let attractionsFind="api/attractions?"
-let pageChoose="page"+page
-
-url=domainAndPort+attractionsFind+pageChoose
+let attractionsFind="api/attractions?";
+let pageChoose="page"+page;
+let thisPageQty=0;
+url=domainAndPort+attractionsFind+pageChoose;
 
 // Page and layout
 
-let onePageQty=12
-let mainOneRowQty=4
+let onePageQty=12;
+let mainOneRowQty=4;
 
 
 
 // Load data from API 
 function loadData(data){
-    data=data["data"]
-    // console.log("data",data)
-    let TPC_attraction_information={}
+    data=data["data"];
+    let TPC_attraction_information={};
     for (let i=0;i<data.length;i++)
     {
         // get the data into array
@@ -33,214 +32,128 @@ function loadData(data){
         
         // id -0
         let attraction_id=attraction["id"];
-        attraction_information.push(attraction_id)
+        attraction_information.push(attraction_id);
 
         // attraction_images -1
-        let attraction_images=attraction["images"][0]
-        attraction_information.push(attraction_images)
-        // console.log("attraction_images",attraction)
+        let attraction_images=attraction["images"];
+        attraction_information.push(attraction_images);
 
         // attraction_name -2
         let attraction_name=attraction["name"];
-        attraction_information.push(attraction_name)
+        attraction_information.push(attraction_name);
 
         // attraction_mrt -3
         let attraction_mrt=attraction["mrt"];
-        attraction_information.push(attraction_mrt)
+        attraction_information.push(attraction_mrt);
 
         // attraction_category -4
         let attraction_category=attraction["category"];
-        attraction_information.push(attraction_category)
+        attraction_information.push(attraction_category);
         
         TPC_attraction_information[i]=attraction_information;
     }
-    return TPC_attraction_information
+    return TPC_attraction_information;
 }
 
 // Creat element from load data
-rowListCount=0
 function createElement(TPC_attraction_information){
 
-    // Creat new fetch div
-    let newFetchDivId="#fetchData"
-    let newFetchDivSelect = document.querySelector(newFetchDivId);
-    let newFetchDiv = document.createElement("div");
-    let newFetchDivIdSet = "fetchDataPage"+page;
-    newFetchDiv.setAttribute("id",newFetchDivIdSet)
-    newFetchDivSelect.appendChild(newFetchDiv);
-
-
-    let fetchDataId="#fetchDataPage"+page
-    let list = document.querySelector(fetchDataId);
-    onePageQty=Object.keys(TPC_attraction_information).length
-    for(let ls_1=0;ls_1<onePageQty;ls_1++){
-        // Creat Row list
-        rowListJudge=ls_1%mainOneRowQty
-        if (rowListJudge==0){
-            rowListCount+=1;
-            let newRowList=document.createElement("div");
-            rowListIdSet="list1_"+rowListCount;
-            newRowList.setAttribute("id",rowListIdSet);
-            newRowList.setAttribute("class","imageRowList");
-            list.appendChild(newRowList);
-        }
-
-        idList=TPC_attraction_information[ls_1][0]
-        // Creat ont item Block
-        let blockChoose = "#"+rowListIdSet
-        let block = document.querySelector(blockChoose);
-        let newBlock=document.createElement("div");
-        blockIdSet="list2_"+idList
-        newBlock.setAttribute("id",blockIdSet)
-        newBlock.setAttribute("class","imageBlock")
-        block.appendChild(newBlock);
+    let fetchDataId="#fetchData";
+    let mainData = document.querySelector(fetchDataId);
+    thisPageQty=Object.keys(TPC_attraction_information).length;
+    for(let ls=0;ls<thisPageQty;ls++){
         
-        // image
-        let imageChoose = "#"+blockIdSet
-        let image = document.querySelector(imageChoose);
-        let newImage=document.createElement("div");
-        imageIdSet="list3_1_"+idList
-        newImage.setAttribute("id",imageIdSet)
-        newImage.setAttribute("class","imageShow")
-        image.appendChild(newImage);
+        // _____________
+        // | Load Data |
+        // ¯¯¯¯¯¯¯¯¯¯¯¯¯
+        // Load data
+        let idList = TPC_attraction_information[ls][0];
+        let attractionImg = TPC_attraction_information[ls][1];
+        let attractionName = TPC_attraction_information[ls][2];
+        let attractionMRT = TPC_attraction_information[ls][3];
+        let attractionCAT = TPC_attraction_information[ls][4];
+        
+        // ________________
+        // | Create Block |
+        // ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
 
-        // Name with Backgroung
-        let nameChoose = "#"+imageIdSet;
-        let name = document.querySelector(nameChoose);
-        let newName=document.createElement("div");
-        nameIdSet = "list5_"+idList
-        newName.setAttribute("id",nameIdSet)
-        newName.setAttribute("class","imageTextName")
-        name.appendChild(newName);
+        // Creat attractions main Block
+        let newMainBlock=document.createElement("div");
+        newMainBlockIdSet="mainId_"+idList;
+        newMainBlock.setAttribute("id",newMainBlockIdSet);
+        newMainBlock.setAttribute("class","imageBlock");
 
-        // Text Box
-        let textBoxChoose = "#"+blockIdSet
-        let textBox = document.querySelector(textBoxChoose);
-        let newTextBox=document.createElement("div");
-        textBoxIdSet="list3_2_"+idList
-        newTextBox.setAttribute("id",textBoxIdSet)
-        newTextBox.setAttribute("class","imageTextBox")
-        textBox.appendChild(newTextBox);
+        mainData.appendChild(newMainBlock);
+        // ======================================================
+        // Attraction Block
+        let newAttractionBlock = document.createElement("div");
+        newAttractionBlockIdSet = "newAttractionBlock_"+idList;
+        newAttractionBlock.setAttribute("id",newAttractionBlockIdSet);
+        newAttractionBlock.setAttribute("class","imageShow") ;
 
-        // MRT
-        let mrtChoose = "#"+textBoxIdSet
-        let mrt = document.querySelector(mrtChoose);
-        let newMrt = document.createElement("div");
-        mrtIdSet="list4_1_"+idList
-        newMrt.setAttribute("id",mrtIdSet)
-        newMrt.setAttribute("class","imageTextMRT")
-        mrt.appendChild(newMrt);
+        newMainBlock.appendChild(newAttractionBlock);
+        
+        // Attraction image
+        let newAttractionImage = document.createElement("img");
+        newAttractionImage.src = attractionImg[0];
 
-        // CAT
-        let catChoose = "#"+textBoxIdSet
-        let cat = document.querySelector(catChoose);
-        let newCat = document.createElement("div");
-        catIdSet="list4_2_"+idList
-        newCat.setAttribute("id",catIdSet)
-        newCat.setAttribute("class","imageTextCAT")
-        cat.appendChild(newCat);
-        // ______________
-        // |    INNER   |
-        // ¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+        newAttractionBlock.appendChild(newAttractionImage);
+        
+        // Attraction name
+        let newAttractionName = document.createElement("p");
+        newAttractionNameIdSet = "newAttractionName_"+idList;
+        newAttractionName.setAttribute("id",newAttractionNameIdSet);
+        newAttractionName.setAttribute("class","imageTextName");
+        newAttractionName.textContent = attractionName;
 
-        // Inner image
-        let newImage_1=document.createElement("img");
-        newImage_1.src = TPC_attraction_information[ls_1][1];
-        newImage_1.className = "imageShow";
-        let imageId_1="list3_1_"+idList;
-        let attractionImage=document.getElementById(imageId_1);
-        attractionImage.appendChild(newImage_1);
+        newAttractionBlock.appendChild(newAttractionName);
 
-        // Inner name
-        let newDiv_name=document.createElement("div");        
-        newDiv_name.id = "list5_"+idList;
-        newDiv_name.className = "imageTextName";
-        let textNode_name = document.createTextNode(TPC_attraction_information[ls_1][2]);
-        newDiv_name.appendChild(textNode_name);
-        document.getElementById(newDiv_name.id).appendChild(newDiv_name);
+        // ======================================================
+        // Attraction details
+        let newDetails =  document.createElement("div");
+        newDetailsIdSet = "newTextBox_"+idList;
+        newDetails.setAttribute("id",newDetailsIdSet);
+        newDetails.setAttribute("class","imageTextBox") ;
 
-        // Inner MRT
-        let newDiv_1=document.createElement("div");        
-        newDiv_1.id = "list4_1_"+idList;
-        newDiv_1.className = "imageTextMRT";
-        let textNode_1 = document.createTextNode(TPC_attraction_information[ls_1][3]);
-        let rr=newDiv_1.appendChild(textNode_1);
-        document.getElementById(newDiv_1.id).appendChild(newDiv_1);
+        newMainBlock.appendChild(newDetails);
 
-        // Inner CAT
-        let newDiv_2=document.createElement("div");        
-        newDiv_2.id = "list4_2_"+idList;
-        newDiv_2.className = "imageTextCAT";
-        let textNode_2 = document.createTextNode(TPC_attraction_information[ls_1][4]);
-        let rr2=newDiv_2.appendChild(textNode_2);
-        document.getElementById(newDiv_2.id).appendChild(newDiv_2);
+        // Details MRT
+        let newMRT = document.createElement("p");
+        newMRTIdSet = "newMrt_"+idList;
+        newMRT.setAttribute("id",newMRTIdSet);
+        newMRT.setAttribute("class","imageTextMRT");
+        newMRT.textContent = attractionMRT;
+
+        newDetails.appendChild(newMRT);
+
+        // Detaiatls CAT
+        let newCAT = document.createElement("p");
+        newCATIdSet = "newMrt_"+idList;
+        newCAT.setAttribute("id",newCATIdSet);
+        newCAT.setAttribute("class","imageTextCAT");
+        newCAT.textContent = attractionCAT;
+
+        newDetails.appendChild(newCAT);
     }
-
+    return thisPageQty;
 
 }
 
 // ***************   fetch the data from Net    ***************
 function fetchAndCreatData(){
-    console.log("HERE1")
-    fetch(
+    return fetch(
         `${domainAndPort}api/attractions?page=${page}&keyword=${keyword}`
     ).then(function(response){
-        console.log("HERE2")
         return response.json();
     }).then(function(data)
     {
-        console.log("HERE3")
-        TPC_attraction_information=loadData(data)
-        createElement(TPC_attraction_information)
+        TPC_attraction_information=loadData(data);
+        thisPageQty=createElement(TPC_attraction_information);
+        observer.observe(target);
         page = data["nextPage"];
-        console.log("page＝＝＝＝＝＝＝＝＝",page)
+        return thisPageQty;
     });
-
-}
-
-// Create category element
-let catOneRowQty = 3
-function creatCategoryElement(data){
-    // Create CAT block
-    let createCat = document.querySelector("#category0");
-    let newCatTable=document.createElement("div");
-    newCatTable.setAttribute("id","category");
-    newCatTable.setAttribute("class","catTable");
-    createCat.appendChild(newCatTable);
-    // Create element
-    let rowListCount=0
-    data=data["data"];        
-    dataQty = data.length
-    let CAT = document.querySelector("#category");
-    for (let ls=0;ls<dataQty;ls++){
-        rowListJudge = ls%catOneRowQty
-        // Create Row
-        if (rowListJudge == 0){
-            rowListCount+=1;
-            let newRowList=document.createElement("div");
-            rowListIdSet="CAT_List1_"+rowListCount;
-            newRowList.setAttribute("id",rowListIdSet);
-            newRowList.setAttribute("class","catRowList");
-            CAT.appendChild(newRowList);
-        }
-        // Creat block
-        let blockChoose = "#"+rowListIdSet
-        let block = document.querySelector(blockChoose);
-        let newBlock=document.createElement("div");
-        blockIdSet="CAT_List2_"+ls
-        newBlock.setAttribute("id",blockIdSet)
-        newBlock.setAttribute("class","catBlock")
-        block.appendChild(newBlock);
-
-        // Inner CAT
-        let newCatDiv=document.createElement("div");        
-        newCatDiv.id = "CAT_List2_"+ls;
-        newCatDiv.className = "catBlock";
-        newCatDiv.setAttribute("onclick","categoryClick(this)")
-        let textNode = document.createTextNode(data[ls]);
-        newCatDiv.appendChild(textNode);
-        document.getElementById(newCatDiv.id).appendChild(newCatDiv);
-    }
+    
 }
 
 // fetch category
@@ -251,146 +164,144 @@ function fetchCategory(){
         creatCategoryElement(data)
     })
 }
+
+// Create category element
+let catOneRowQty = 3;
+let CAT = document.querySelector("#category0");
+function creatCategoryElement(data){
+    data = data["data"];    
+    for (ls=0;ls<data.length;ls++){
+        let newCatDiv = document.createElement("div");
+        newCatDiv.className = "catBlock";
+        newCatDiv.setAttribute("onclick","categoryClick(this)");
+        newCatDiv.textContent = data[ls];
+        CAT.appendChild(newCatDiv);
+    }
+}
+
+
 // =========================================
 // =======   CAT SHOW and DISAPPEAR  =======
 // =========================================
-let clickSearchBarNum = 0
-let showOrDisJudge =0
+
+fetchCategory()
+let clickSearchBarNum = 0;
+let showOrDisJudge = 0;
 let body = document.getElementById('body');
 let searchBar = document.querySelector("#keyword");
 
 document.addEventListener("click", function () {
-    showOrDisCatClickDoc();
+    closeCat();
 }, false);
 searchBar.addEventListener("click", function (ev) {
     clickSearchBarCount();
-    showOrDisCat();
+    showCat();    
     ev.stopPropagation();
 }, false);
 
 function clickSearchBarCount(){
-    clickSearchBarNum = clickSearchBarNum+1
+    clickSearchBarNum += 1
     showOrDisJudge = clickSearchBarNum%2
 }
-
-function showOrDisCat(){
+function showCat(){
     if (showOrDisJudge == 1){
-        fetchCategory()
+        CAT.style.display = "grid";
     }else{
-        let categoryShow = document.querySelector("#category");
-        categoryShow.remove()
+        CAT.style.display = "none";
     }
-};
-
-function showOrDisCatClickDoc(){
-    if (showOrDisJudge == 1){ 
-        clickSearchBarNum = 0
-        let categoryShow = document.querySelector("#category");
-        categoryShow.remove()
-        showOrDisJudge = 0
-    }else{
-        clickSearchBarNum = 0
-    }
+} 
+function closeCat(){
+    CAT.style.display = "none";
+    clickSearchBarNum=0
 }
+
 // =========================================
 // =======   CAT CHOOSE AND SHOW ON  =======
 // =========================================
-let categorySelectBar = document.querySelector("#category0");
-categorySelectBar.addEventListener("click", function (ev) {
+
+CAT.addEventListener("click", function (ev) {
     chooseCategory();
-    showOrDisCatClickDoc();
+    closeCat()
     ev.stopPropagation();
 }, false);
 
 function chooseCategory(){
-    categorySelectBar.addEventListener("mousedown",chooseOneCategoryAndShow());
+    CAT.addEventListener("mousedown",chooseOneCategoryAndShow());
+
 }
 
 function chooseOneCategoryAndShow(){
     document.getElementById("keyword").value = categoryChosen;
 }
 
-let categoryChosen = ""
-function categoryClick(element){
-    categoryChosen = element.innerHTML
+let categoryChosen = "";
+function categoryClick(element){ 
+    categoryChosen = element.innerHTML;
 }
 
 // =========================================
-// =======   USE KEY WORD TO SEARCH  =======
+// =======   USE KEYWORD TO SEARCH  ========
 // =========================================
 let searchBarButton = document.querySelector(".searchBarButton")
 searchBarButton.addEventListener("click",searchAttraction);
 
-function searchAttraction(){
+async function searchAttraction(){
     // Remove Data
     let fetchDataSelect = document.querySelector("#fetchData");
-    fetchDataSelect.remove()
+    fetchDataSelect.remove();
     // Creat new fetch div
     let mainFetchDataSelect = document.querySelector("#mainFetchData");
     let newFetchDiv = document.createElement("div");
-    let newFetchDivId="fetchData"    
-    newFetchDiv.setAttribute("id",newFetchDivId)
+    let newFetchDivId="fetchData"    ;
+    newFetchDiv.setAttribute("id",newFetchDivId);
+    newFetchDiv.setAttribute("class","fetchData");
     mainFetchDataSelect.appendChild(newFetchDiv);
     // Defind page and keyword
-    // page = 0
+    page = 0
     keywordDiv = document.querySelector("#keyword");
     keyword = keywordDiv.value;
-
+    thisPageQty=await fetchAndCreatData();
     // If no Data
-    console.log("page",page)
-    console.log("RR",TPC_attraction_information.length)
-    if (Object.keys(TPC_attraction_information).length == 0){
-        let mainFetchDataSelect = document.querySelector("#mainFetchData");
+    if (thisPageQty== 0){
+        let mainFetchDataSelect = document.querySelector("#fetchData");
         let noData = document.createElement("div");
-        let noDataId="fetchData"    
-        noData.setAttribute("id",noDataId)
-        mainFetchDataSelect.appendChild(noData);
+        let noDataId="fetchNoData";
+        noData.setAttribute("id",noDataId);
+        noData.setAttribute("class","fetchNoData");
+        noData.textContent = "No Data";
+        mainFetchDataSelect.appendChild(noData);       
+    }     
 
-        let newDiv_name=document.createElement("div");        
-        newDiv_name.id = "fetchData";
-        newDiv_name.className = "imageTextName";
-        let textNode_name = document.createTextNode("No Data")
-        newDiv_name.appendChild(textNode_name);
-        document.getElementById(newDiv_name.id).appendChild(newDiv_name);
-        console.log("check1")        
-    }
-    // fetchAndCreatData(); 
-    console.log("check2")
 }
 
 // IntersectionObserver
 let target = document.querySelector("footer");
-ccount = 0
-let callback = (entries) => {
-    console.log("count0",ccount)
-    for (const entry of entries) 
-    {
-        // ccount+=1
-        // console.log("count1",ccount)
-      // Load more
-      if (entry.isIntersecting) {
-        console.log("count2",ccount)
+let callback = (entries,observer) => {
+    entries.forEach(entry => {
         if (page != null) {
             fetchAndCreatData(); 
-            // console.log("HERE5",page)                   
         } 
         else {
-          observer.observe(target);            
-        //   console.log("HERE6",page)            
-        }
-      }
-    }
-    // console.log("Done")
-}
-
+            observer.unobserve(target);
+        }        
+    });
+};
 let options={
-    rootMargin: '0px',
+    root:null,
+    // rootMargin: '100px',
     threshold: 0,
 }
 let observer = new IntersectionObserver(callback, options);
 observer.observe(target);
-
 function pageReturn0(){
-    page=0
-    console.log("page",page)
+    page=0;
+}
+
+function show(){
+    let testChange = document.querySelector("#www");
+    testChange.style.display = "grid";
+}
+function hide(){
+    let testChange = document.querySelector("#www");
+    testChange.style.display = "none";
 }
