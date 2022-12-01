@@ -6,10 +6,18 @@ Authored by SC Siao
 
 from flask import *
 from MySQL_con import *
+from flask_cors import CORS
 
-app=Flask(__name__)
+app=Flask(
+	__name__,
+	static_folder="static",
+    static_url_path="/static"
+)
+CORS(app)
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
+
+
 
 @app.route("/api/attractions", methods=["GET"])
 def attractions():
@@ -54,14 +62,15 @@ def attractions():
 			data_image_ls=[]
 			data_image=[]
 			id_check=data["id"]
+			
 			# With keyword 
 			if keyword!=False:
 				sql_command="""
 				SELECT attraction_id,images FROM attraction
 				INNER JOIN attraction_image ON attraction.id=attraction_image.attraction_id
 				WHERE category LIKE %s AND attraction_id LIKE %s OR name LIKE %s AND attraction_id LIKE %s;
-				"""
-				sql_input=("%"+keyword+"%",id_check,keyword,id_check)
+				"""	
+				sql_input=(keyword,id_check,"%"+keyword+"%",id_check)
 				attraction_img=query_data(sql_command,sql_input)
 			# WithOut keyword
 			else:
@@ -91,10 +100,10 @@ def attractions():
 			next_page=None
 		
 		# Combine
-		data_main={
+		data_main=jsonify({
 			"nextPage":next_page,
 			"data":data_result
-			}
+			})
 		return data_main
 
 	# Unexcept situation
