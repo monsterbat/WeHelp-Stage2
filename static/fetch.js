@@ -31,24 +31,44 @@ function loadData(data){
         let attraction=data[i];
         
         // id -0
-        let attraction_id=attraction["id"];
+        let attraction_id = attraction["id"];
         attraction_information.push(attraction_id);
 
         // attraction_images -1
-        let attraction_images=attraction["images"];
+        let attraction_images = attraction["images"];
         attraction_information.push(attraction_images);
 
         // attraction_name -2
-        let attraction_name=attraction["name"];
+        let attraction_name = attraction["name"];
         attraction_information.push(attraction_name);
 
         // attraction_mrt -3
-        let attraction_mrt=attraction["mrt"];
+        let attraction_mrt = attraction["mrt"];
         attraction_information.push(attraction_mrt);
 
         // attraction_category -4
-        let attraction_category=attraction["category"];
+        let attraction_category = attraction["category"];
         attraction_information.push(attraction_category);
+
+        // attraction_address -5
+        let attraction_address = attraction["address"];
+        attraction_information.push(attraction_address);
+
+        // attraction_description -6
+        let attraction_description = attraction["description"];
+        attraction_information.push(attraction_description);
+
+        // attraction_ -7
+        let attraction_transport = attraction["transport"];
+        attraction_information.push(attraction_transport);
+        
+        // attraction_ -8
+        let attraction_lat = attraction["lat"];
+        attraction_information.push(attraction_lat);
+
+        // attraction_ -9
+        let attraction_lng = attraction["lng"];
+        attraction_information.push(attraction_lng);
         
         TPC_attraction_information[i]=attraction_information;
     }
@@ -78,8 +98,9 @@ function createElement(TPC_attraction_information){
         // ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
 
         // Creat attractions main Block
-        let newMainBlock=document.createElement("div");
+        let newMainBlock=document.createElement("a");
         newMainBlockIdSet="mainId_"+idList;
+        newMainBlock.setAttribute("href",`/attraction/${idList}`);
         newMainBlock.setAttribute("id",newMainBlockIdSet);
         newMainBlock.setAttribute("class","imageBlock");
 
@@ -143,7 +164,7 @@ function createElement(TPC_attraction_information){
 function fetchAndCreatData(){
     return fetch(
         `${domainAndPort}api/attractions?page=${page}&keyword=${keyword}`
-    ).then(function(response){
+    ).then((response)=>{
         return response.json();
     }).then(function(data)
     {
