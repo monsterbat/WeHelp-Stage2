@@ -35,7 +35,7 @@ main .section1ImageAndBooking .attractionsImagesShow .leftButton{
     position:absolute;
     width: 36px;
     height: 36px;
-    left: 4%; 
+    left: 3%; 
     top: 50%;
     z-index: 10;
     opacity: 0.6;
@@ -45,7 +45,8 @@ main .section1ImageAndBooking .attractionsImagesShow .RightButton{
     position:absolute;
     width: 36px;    
     height: 36px;
-    left: 90%;
+    right: 3%;
+    left:auto;
     top: 50%;
     z-index: 10;
     opacity: 0.6;
