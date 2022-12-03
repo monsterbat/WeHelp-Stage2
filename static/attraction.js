@@ -152,7 +152,7 @@ function createElement(TPC_attraction_information){
     timeChooseBlock.appendChild(timeChooseTitle)
     // 上半天 下半天 Block
     let timeChosenBlock = document.createElement("div")
-    timeChosenBlock.setAttribute("id","timeChooseTitle")
+    timeChosenBlock.setAttribute("id","timeChosenBlock")
     timeChosenBlock.setAttribute("class","timeChosenBlock")
     timeChooseBlock.appendChild(timeChosenBlock)
     // 上半天 下半天
