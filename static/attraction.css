@@ -1,0 +1,566 @@
+main{
+    z-index: 1;
+    margin-top: 37px;
+}
+/* Section 1 Image*/
+main .section1ImageAndBooking{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1200px;
+    height: 400px;
+    left: 360px;
+    top: 94px;
+}
+
+main .section1ImageAndBooking .attractionsImagesShow{
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    /* padding-left: 10px;
+    padding-right: 10px; */
+    margin-left: 10px;
+    margin-right: 10px;
+}
+main .section1ImageAndBooking .attractionsImagesShow img{
+    position: relative;
+    object-fit: cover;
+    width: 540px;
+    height: 406px;
+    left: 0px;
+    top: 0px;
+    border-radius: 5px;
+}
+main .section1ImageAndBooking .attractionsImagesShow .leftButton{
+    position:absolute;
+    width: 36px;
+    height: 36px;
+    left: 3%; 
+    top: 50%;
+    z-index: 10;
+    opacity: 0.6;
+    cursor: pointer;
+}   
+main .section1ImageAndBooking .attractionsImagesShow .RightButton{
+    position:absolute;
+    width: 36px;    
+    height: 36px;
+    right: 3%;
+    left:auto;
+    top: 50%;
+    z-index: 10;
+    opacity: 0.6;
+    cursor: pointer;
+}
+main .section1ImageAndBooking .attractionsImagesShow .bottomCircleBlock{
+    position:absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 540px;    
+    height: 36px;
+    /* left:0px; */
+    bottom: 0%;
+    z-index: 10;
+    opacity: 0.6;    
+}
+
+main .section1ImageAndBooking .attractionsImagesShow .bottomCircleBlock img{
+    /* box-sizing: border-box; */
+    width: 12px;
+    height: 12px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    padding: 3px;
+    
+}
+
+
+/* Section 1 Booking*/
+main .section1ImageAndBooking .nameAndBooking{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-right: 20px;
+    width: 600px;
+    height: 400px;
+    left: 0px;
+    top: 0px;
+}
+
+main .section1ImageAndBooking .nameAndBooking .name{
+    position: absolute;
+    width: auto;
+    height: 33px;
+    left: 0px;
+    top: 0px;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    /* or 100% */
+
+    display: flex;
+    align-items: center;
+    color: #666666;
+
+}
+main .section1ImageAndBooking .nameAndBooking .catAndMrt{
+    position: absolute;
+    width: auto;
+    height: 22px;
+    left: 0px;
+    top: 48px;
+
+    /* Body - Med 16(13.3) */
+
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 13px;
+    /* or 83% */
+
+    display: flex;
+    align-items: center;
+    /* Secondary Color/Gray 70 */
+
+    color: #666666;
+}
+
+main .section1ImageAndBooking .nameAndBooking .bookingBlock{
+    position: absolute;
+    width: 600px;
+    height: 302px;
+    left: 0px;
+    top: 90px;
+
+    /* Secondary Color/Gray 20 */
+
+    background: #E8E8E8;
+    border-radius: 5px;
+}
+
+main .section1ImageAndBooking .nameAndBooking .bookingBlock .bookingTitle{
+    position: absolute;
+    width: auto;
+    height: 22px;
+    left: 20px;
+    top: 15px;
+
+    /* Body - Bold 16(13.3) */
+
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 13px;
+    /* or 83% */
+
+    display: flex;
+    align-items: center;
+
+    /* Secondary Color/Gray 70 */
+
+    color: #666666;
+}
+main .section1ImageAndBooking .nameAndBooking .bookingBlock .bookingDescription{
+    position: absolute;
+    width: auto;
+    height: 24px;
+    left: 20px;
+    top: 52px;
+
+    /* Body - Med 16(13.3) */
+    
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 23px;
+    /* or 83% */
+
+    display: flex;
+    align-items: center;
+
+    /* Secondary Color/Gray 70 */
+
+    color: #666666;
+}
+main .section1ImageAndBooking .nameAndBooking .bookingBlock .dataChooseBlock{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    width: auto;
+    height: 33px;
+    left: 20px;
+    top: 95px;
+}
+
+main .section1ImageAndBooking .nameAndBooking .bookingBlock .dataChooseBlock .dataChooseTitle{
+    position: absolute;
+    width: 81px;
+    height: 17px;
+    left: 0px;
+    top: 9px;
+
+    /* Body - Bold 16(13.3) */
+
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 13px;
+    /* or 83% */
+
+    display: flex;
+    align-items: center;
+
+    /* Secondary Color/Gray 70 */
+
+    color: #666666;
+}
+main .section1ImageAndBooking .nameAndBooking .bookingBlock .dataChooseBlock .dataInput{
+    position: absolute;
+    /* White */
+    background: #FFFFFF;
+    width: 149px;
+    height: 25px;
+    left: 86px;
+    /* Body - Med 16(13.3) */
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 13px;
+    /* or 83% */
+
+    display: flex;
+    align-items: center;
+
+    /* Black */
+
+    color: #000000;
+
+    cursor: pointer;
+}
+main .section1ImageAndBooking .nameAndBooking .bookingBlock .timeChooseBlock{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    width: auto;
+    height: 33px;
+    left: 20px;
+    top: 140px;
+}
+
+main .section1ImageAndBooking .nameAndBooking .bookingBlock .timeChooseBlock .timeChooseTitle{
+    position: absolute;
+    width: 81px;
+    height: 17px;
+    left: 0px;
+    top: 9px;
+
+    /* Body - Bold 16(13.3) */
+
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 13px;
+    /* or 83% */
+
+    display: flex;
+    align-items: center;
+
+    /* Secondary Color/Gray 70 */
+
+    color: #666666;
+}
+
+main .section1ImageAndBooking .nameAndBooking .bookingBlock .timeChooseBlock .timeChosenBlock{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    
+    width: auto;
+    height: 33px;
+    left: 86px;
+    top: 0px;
+}
+/* ====== */
+main .section1ImageAndBooking .nameAndBooking .bookingBlock .timeChooseBlock .timeChosenBlock input[type='radio']:after{
+    position: absolute;
+    width: 13px;
+    height: 13px;
+    border-radius: 16px;
+    cursor: pointer;
+
+    background-color: #FFFFFF;
+    top: -2px;
+    left: -2px;
+    position: relative;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}
+
+main .section1ImageAndBooking .nameAndBooking .bookingBlock .timeChooseBlock .timeChosenBlock input[type='radio']:checked:after{
+    position: absolute;
+    width: 13px;
+    height: 13px;
+    border-radius: 16px;
+    align-items: center;  
+    cursor: pointer;
+
+    background-color: #448899;
+    top: -2px;
+    left: -2px;
+    position: relative;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}
+/* ====== */
+main .section1ImageAndBooking .nameAndBooking .bookingBlock .timeChooseBlock .timeChosenBlock label{
+    /* position: absolute; */
+    width: 48px;
+    height: 14px;
+
+    /* Body - Med 16(13.3) */
+
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 13px;
+    /* identical to box height, or 83% */
+
+    display: flex;
+    align-items: center;
+
+    /* Secondary Color/Gray 70 */
+
+    color: #666666;
+}
+
+main .section1ImageAndBooking .nameAndBooking .bookingBlock .guidePriceBlock{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    width: auto;
+    height: 33px;
+    left: 20px;
+    top: 180px;
+}
+main .section1ImageAndBooking .nameAndBooking .bookingBlock .guidePriceBlock .guidePriceTitle{
+    position: absolute;
+    width: 81px;
+    height: 22px;
+    left: 0px;
+    /* top: 0px; */
+
+    /* Body - Bold 16(13.3) */
+
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 13px;
+    /* or 83% */
+
+    display: flex;
+    align-items: center;
+
+    /* Secondary Color/Gray 70 */
+
+    color: #666666;
+}
+
+main .section1ImageAndBooking .nameAndBooking .bookingBlock .guidePriceBlock div{
+    position: absolute;
+    width: 150px;
+    height: 14px;
+    left: 86px;
+    /* top: 4px; */
+    align-items: center;
+    /* Body - Med 16(13.3) */
+
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 13px;
+    /* identical to box height, or 83% */
+
+    display: flex;
+    align-items: center;
+
+    /* Secondary Color/Gray 70 */
+
+    color: #666666;
+}
+main .section1ImageAndBooking .nameAndBooking .bookingBlock .startButton{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 10px 20px;
+
+    /* position: absolute; */
+    width: 154px;
+    height: 36px;
+    left: 20px;
+    top: 225px;
+
+    /* Primary Color/Cyan 70 */
+
+    background: #448899;
+    border-radius: 5px;
+    width: 114px;
+    height: 16px;
+
+    /* Button - Reg 19(16) */
+
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 16px;
+    /* identical to box height, or 84% */
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    /* Additional Color/White */
+
+    color: #FFFFFF;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+
+    cursor: pointer;
+}
+
+main .spacer{
+    margin-top: 30px;
+    margin-bottom: 20px;
+    width: 1200px;
+    height: 0px;
+    left: 360px;
+    top: 534px;
+
+    /* Gray 300 */
+
+    border: 1px solid #E8E8E8;
+}
+
+/* Section 2 Descript */
+main .descriptionAndAddress{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 1200px;
+    height: 100%;
+
+}
+main .descriptionAndAddress .content{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: auto;
+    /* Content - Reg 16(Auto) */
+
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 23px;
+    /* Secondary Color/Gray 70 */
+
+    color: #666666;
+}
+main .descriptionAndAddress .boldTitle{
+    margin-top: 20px;
+    margin-bottom: 0px;
+    width: auto;
+    /* Body - Bold 16(13.3) */
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 13px;
+    /* or 83% */
+    display: flex;
+    align-items: center;
+    /* Secondary Color/Gray 70 */
+
+    color: #666666;
+}
+
+@media (max-width: 1200px){
+    main{
+        z-index: 1;
+        margin-top: 0px;
+    }
+    /* Section 1 */
+    main .section1ImageAndBooking{
+        height: auto;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    main .section1ImageAndBooking .attractionsImagesShow{
+        width: 100%;
+        height: auto;    
+        background-size: cover;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+    main .section1ImageAndBooking .attractionsImagesShow img{
+        width: 100%;
+        /* height: auto; */
+        background-position: center 25%;
+        background-size: cover;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+    main .section1ImageAndBooking .attractionsImagesShow .bottomCircleBlock{
+        width: 100%;
+        height: auto;
+        bottom: 5%;
+    }
+
+    /* Section 1 Booking */
+    main .section1ImageAndBooking .nameAndBooking{
+        width: 90%;
+        padding: 0px;
+        /* height: auto; */
+    }
+    main .section1ImageAndBooking .nameAndBooking .bookingBlock{
+        width: 100%;
+        /* padding: 0px; */
+    }
+    main .section1ImageAndBooking .nameAndBooking .bookingBlock .bookingDescription{
+        width: 90%;
+    }
+    main .spacer{
+        width: 95%;
+    }
+    main .descriptionAndAddress{
+        width: 90%;
+    }
+
+}
