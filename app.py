@@ -1,12 +1,14 @@
 """
 WeHelp BootCamp Assignemt - Stage 2 taipei_day_trip -*- main program -*-
-Update date: 2022/11/17
+Update date: 2022/12/08
 Authored by SC Siao
 """
 
 from flask import *
 from MySQL_con import *
 from flask_cors import CORS
+import jwt
+import time
 
 app=Flask(
 	__name__,
@@ -17,6 +19,181 @@ CORS(app)
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
 
+
+jwt_key = "key"
+
+@app.route("/api/user/auth", methods=["PUT","GET","DELETE"])
+def auth():
+	if request.method == "GET":
+		try:
+			token = request.cookies.get('token')
+			print("token",token)
+			# Judge with token or not
+			if token == None:
+				time_out_msg = jsonify({
+					"data":None
+				})
+				return time_out_msg,200
+			else:
+				token_data = jwt.decode(token, jwt_key, algorithms="HS256")
+				user_email = token_data["email"]
+				sql_command="""
+				SELECT id,name,email
+				FROM user 
+				WHERE email=%s;
+				"""
+				value_input = (user_email,)
+				user_info = query_data(sql_command,value_input)
+				# Judge token right or wrong
+				if user_info == []:
+					verify_msg = jsonify({
+						"error": True,
+						"message": "token 有誤"
+					})
+				verify_msg = ({
+					"data":{
+						"id":user_info[0][0],
+						"name":user_info[0][1],
+						"email":user_info[0][2]
+					}
+				})
+				print("user_email",verify_msg)
+				return verify_msg,200
+
+		except:
+			errorr_message = {
+				"error": True,
+				"message": "請按照情境提供對應的錯誤訊息"
+			}
+			return errorr_message,500
+	if request.method == "PUT":
+		try:
+			sign_in_data = request.get_json()
+			user_email = sign_in_data["email"]
+			user_password = sign_in_data["password"]
+			print("sign_in_data",sign_in_data)
+			# Email check
+			sql_command="""
+			SELECT email
+			FROM user 
+			WHERE email=%s;
+			"""
+			value_input = (user_email,)
+			email_check = query_data(sql_command,value_input)
+
+			# Password check
+			sql_command="""
+			SELECT password
+			FROM user 
+			WHERE password=%s;
+			"""
+			value_input = (user_password,)
+			passowrd_check = query_data(sql_command,value_input)
+			print("len mail",len(email_check),"len pw",len(passowrd_check))
+			if len(email_check) == 1 and len(passowrd_check) ==1:
+				print("go",sign_in_data)
+				result=jsonify({"ok":True})
+				# JWT token sgould not include password
+				sign_in_data_email_only = {
+					"email":sign_in_data["email"]
+				}
+				print("sign_in_data_email_only",sign_in_data_email_only)
+				token = jwt.encode(sign_in_data_email_only, jwt_key, algorithm="HS256")
+				result.set_cookie(key="token", value=token, expires=time.time()+10*60)
+				print("token",token)
+				print("expires",time.time()+60)
+				return result
+			else:
+				error_msg = ""
+				if len(email_check) != 1:
+					error_msg = "信箱"
+				if len(passowrd_check) != 1:
+					error_msg = error_msg+" 密碼"
+				errorr_message = jsonify({
+				"error": True,
+				"message": error_msg+"有誤"
+				})
+				print(errorr_message)
+				return errorr_message,400
+			
+		except:
+			errorr_message = jsonify({
+				"error": True,
+				"message": "500請按照情境提供對應的錯誤訊息"
+			})
+			return errorr_message,500
+	if request.method == "DELETE":
+		try:
+			token_del = Response('delete cookies')
+			token_del = jsonify({"ok":True})
+			token_del.set_cookie(key='token', value='', expires=0)
+			
+			print(token_del)
+			return token_del
+		except:
+			errorr_message = {
+				"error": True,
+				"message": "500請按照情境提供對應的錯誤訊息"
+			}
+			return errorr_message,500
+@app.route("/api/user", methods=["POST"])
+def user():
+	try:
+		sign_up_data = request.get_json()
+		user_name = sign_up_data["name"]
+		user_email = sign_up_data["email"]
+		user_password = sign_up_data["password"]
+
+		# MySQL data Check
+		# name check
+		sql_command="""
+		SELECT name
+        FROM user 
+		WHERE name=%s;
+		"""
+		value_input = (user_name,)
+		name_check = query_data(sql_command,value_input)
+
+		# Email check
+		sql_command="""
+		SELECT email
+        FROM user 
+		WHERE email=%s;
+		"""
+		value_input = (user_email,)
+		email_check = query_data(sql_command,value_input)
+
+		if name_check == [] and email_check == []:					
+			sql_command = """
+			INSERT INTO user (name, email, password)
+			VALUES (%s,%s,%s);
+			"""
+			value_input = (user_name,user_email,user_password)
+			insert_or_update_data(sql_command,value_input)
+			print("go",sign_up_data)
+			data=jsonify({"ok":True})
+			return data
+
+		else:
+			error_msg = ""
+			if name_check != []:
+				error_msg = "名字"
+			if email_check != []:
+				error_msg = error_msg+" 信箱"
+			errorr_message = jsonify({
+			"error": True,
+			"message": error_msg+"重複"
+			})
+			print(errorr_message)
+			return errorr_message,400
+
+		
+	except:
+		errorr_message = jsonify({
+            "error": True,
+            "message": "500請按照情境提供對應的錯誤訊息"
+        })
+		return errorr_message,500
 
 
 @app.route("/api/attractions", methods=["GET"])
@@ -108,10 +285,10 @@ def attractions():
 
 	# Unexcept situation
 	except:
-		errorr_message = {
+		errorr_message = jsonify({
             "error": True,
             "message": "請按照情境提供對應的錯誤訊息"
-        }
+        })
 		return errorr_message,500
 
 @app.route("/api/attraction/<attractionId>", methods=["GET"])
@@ -163,17 +340,17 @@ def attractionId(attractionId):
 			return data_main
 		# No data situation
 		else:
-			errorr_message = {
+			errorr_message = jsonify({
             "error": True,
             "message": "請按照情境提供對應的錯誤訊息"
-        }
+        })
 		return errorr_message,400
 	# Unexcept situation
 	except:
-		errorr_message = {
+		errorr_message = jsonify({
             "error": True,
             "message": "請按照情境提供對應的錯誤訊息"
-        }
+        })
 		return errorr_message,500
 
 @app.route("/api/categories", methods=["GET"])
@@ -196,10 +373,10 @@ def categories():
 		return data
 	# Unexcept situation
 	except:
-		errorr_message = {
+		errorr_message = jsonify({
             "error": True,
             "message": "請按照情境提供對應的錯誤訊息"
-        }
+        })
 		return errorr_message,500
 
 # Pages
