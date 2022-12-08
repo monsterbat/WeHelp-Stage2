@@ -74,7 +74,6 @@ function loadData(data){
     }
     return TPC_attraction_information;
 }
-
 // Creat element from load data
 function createElement(TPC_attraction_information){
 
@@ -159,7 +158,6 @@ function createElement(TPC_attraction_information){
     return thisPageQty;
 
 }
-
 // ***************   fetch the data from Net    ***************
 function fetchAndCreatData(){
     return fetch(
@@ -170,13 +168,12 @@ function fetchAndCreatData(){
     {
         TPC_attraction_information=loadData(data);
         thisPageQty=createElement(TPC_attraction_information);
-        observer.observe(target);
+        // observer.observe(target);
         page = data["nextPage"];
         return thisPageQty;
     });
     
 }
-
 // fetch category
 function fetchCategory(){
     fetch(`${domainAndPort}api/categories`).then(function(response){
@@ -282,14 +279,21 @@ async function searchAttraction(){
     keywordDiv = document.querySelector("#keyword");
     keyword = keywordDiv.value;
     thisPageQty=await fetchAndCreatData();
+    console.log("thisPageQty",thisPageQty)
     // If no Data
     if (thisPageQty== 0){
         let mainFetchDataSelect = document.querySelector("#fetchData");
+        mainFetchDataSelect.style = `
+            
+            justify-content:center;
+            display: inline-flex;
+            `
         let noData = document.createElement("div");
         let noDataId="fetchNoData";
         noData.setAttribute("id",noDataId);
         noData.setAttribute("class","fetchNoData");
-        noData.textContent = "No Data";
+        
+        noData.textContent = "找不到資料";
         mainFetchDataSelect.appendChild(noData);       
     }     
 
@@ -316,13 +320,4 @@ let observer = new IntersectionObserver(callback, options);
 observer.observe(target);
 function pageReturn0(){
     page=0;
-}
-
-function show(){
-    let testChange = document.querySelector("#www");
-    testChange.style.display = "grid";
-}
-function hide(){
-    let testChange = document.querySelector("#www");
-    testChange.style.display = "none";
 }

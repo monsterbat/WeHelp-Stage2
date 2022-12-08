@@ -9,6 +9,9 @@ from MySQL_con import *
 from flask_cors import CORS
 import jwt
 import time
+# Hash code to save password
+from flask_bcrypt import Bcrypt
+bcrypt = Bcrypt()
 
 app=Flask(
 	__name__,
@@ -18,7 +21,6 @@ app=Flask(
 CORS(app)
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
-
 
 jwt_key = "key"
 
@@ -71,26 +73,23 @@ def auth():
 			sign_in_data = request.get_json()
 			user_email = sign_in_data["email"]
 			user_password = sign_in_data["password"]
+
 			print("sign_in_data",sign_in_data)
 			# Email check
 			sql_command="""
-			SELECT email
+			SELECT email, password
 			FROM user 
 			WHERE email=%s;
 			"""
 			value_input = (user_email,)
-			email_check = query_data(sql_command,value_input)
+			user_check = query_data(sql_command,value_input)
+			email_check = user_check[0][0]
+			passowrd_check = user_check[0][1]
+			
+			# Password with hash coding
+			check_password = bcrypt.check_password_hash(passowrd_check, user_password)
 
-			# Password check
-			sql_command="""
-			SELECT password
-			FROM user 
-			WHERE password=%s;
-			"""
-			value_input = (user_password,)
-			passowrd_check = query_data(sql_command,value_input)
-			print("len mail",len(email_check),"len pw",len(passowrd_check))
-			if len(email_check) == 1 and len(passowrd_check) ==1:
+			if check_password == True and len(email_check) == 1:
 				print("go",sign_in_data)
 				result=jsonify({"ok":True})
 				# JWT token sgould not include password
@@ -99,9 +98,9 @@ def auth():
 				}
 				print("sign_in_data_email_only",sign_in_data_email_only)
 				token = jwt.encode(sign_in_data_email_only, jwt_key, algorithm="HS256")
-				result.set_cookie(key="token", value=token, expires=time.time()+10*60)
-				print("token",token)
-				print("expires",time.time()+60)
+				
+				cookie_sustain_days = 1
+				result.set_cookie(key="token", value=token, expires=time.time()+cookie_sustain_days*60*60*24)
 				return result
 			else:
 				error_msg = ""
@@ -119,7 +118,7 @@ def auth():
 		except:
 			errorr_message = jsonify({
 				"error": True,
-				"message": "500請按照情境提供對應的錯誤訊息"
+				"message": "請按照情境提供對應的錯誤訊息"
 			})
 			return errorr_message,500
 	if request.method == "DELETE":
@@ -133,7 +132,7 @@ def auth():
 		except:
 			errorr_message = {
 				"error": True,
-				"message": "500請按照情境提供對應的錯誤訊息"
+				"message": "請按照情境提供對應的錯誤訊息"
 			}
 			return errorr_message,500
 @app.route("/api/user", methods=["POST"])
@@ -163,6 +162,9 @@ def user():
 		value_input = (user_email,)
 		email_check = query_data(sql_command,value_input)
 
+		# Save password with hash coding		
+		user_password = bcrypt.generate_password_hash(password=user_password)
+
 		if name_check == [] and email_check == []:					
 			sql_command = """
 			INSERT INTO user (name, email, password)
@@ -191,7 +193,7 @@ def user():
 	except:
 		errorr_message = jsonify({
             "error": True,
-            "message": "500請按照情境提供對應的錯誤訊息"
+            "message": "請按照情境提供對應的錯誤訊息"
         })
 		return errorr_message,500
 

@@ -219,13 +219,13 @@ main{
     right: 15px;
     top:25%;
     z-index: 300;
-    background: #69a7b9;
+    background: #cacccd;
     border-radius: 19px;
     cursor: pointer;    
 }
 .signUp .titleAndCloseBlock .closeImage :hover,
 .signIn .titleAndCloseBlock .closeImage :hover{
-    background: #5a91a0;
+    background: #a5abae;
     border-radius: 19px;
 }
 .signUp .titleAndCloseBlock .closeImage img,
@@ -375,13 +375,24 @@ main{
     color: #FFFFFF;
 }
 
-.signIn .signInSuccess{
+
+.signIn .signInJudge{
     display: none;
-}
-.signIn .signInFail{
-    display: none;
+    width: 310px;
+    height: 22px;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 13px;
+    color: #ad3838;
+    align-items: center;
+    text-align: center;
+    justify-self: center;
+    margin: 5px;
 }
 .signUp .signUpJudge{
+    display: none;
     width: 310px;
     height: 22px;
     font-family: 'Noto Sans TC';
@@ -531,6 +542,17 @@ main{
     padding: 10px;
 }  
 
+.mainFetchData .fetchData .fetchNoData{
+    display:flex;
+    width: 100%;
+    height: 100px;
+    background:#bcbcbc;
+    border-radius: 5px;
+    justify-content:center;
+    align-content:center;
+    align-items:center;
+}
+
 .fetchData .imageBlock{
     width: 270px;
     height: 242px;
@@ -667,6 +689,16 @@ footer p{
         width: 100%;
         grid-template-columns: repeat(2, 1fr);
       }
+    .mainFetchData .fetchData .fetchNoData{
+        display:flex;
+        width: 100%;
+        height: 50px;
+        background:#bcbcbc;
+        border-radius: 5px;
+        justify-content:center;
+        align-content:center;
+        align-items:center;
+    }
     .fetchData .imageBlock .imageTextBox{
         height: 45px;
     }
