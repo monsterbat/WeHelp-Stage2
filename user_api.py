@@ -61,7 +61,6 @@ def auth():
             sign_in_data = request.get_json()
             user_email = sign_in_data["email"]
             user_password = sign_in_data["password"]
-            print(user_password)
             # Email check
             sql_command="""
             SELECT email, password
@@ -70,13 +69,13 @@ def auth():
             """
             value_input = (user_email,)
             user_check = query_data(sql_command,value_input)
-            email_check = user_check[0][0]
-            passowrd_check = user_check[0][1]
-            
-            # Password with hash coding
-            check_password = bcrypt.check_password_hash(passowrd_check, user_password)
-
-            if check_password == True and len(email_check) == 1:
+            check_password = ""
+            if user_check != []:
+                email_check = user_check[0][0]
+                passowrd_check = user_check[0][1]
+                # Password with hash coding
+                check_password = bcrypt.check_password_hash(passowrd_check, user_password)
+            if check_password == True:
                 result=jsonify({"ok":True})
                 # JWT token sgould not include password
                 sign_in_data_email_only = {
@@ -88,11 +87,7 @@ def auth():
                 result.set_cookie(key="token", value=token, expires=time.time()+cookie_sustain_days*60*60*24)
                 return result
             else:
-                error_msg = ""
-                if len(email_check) != 1:
-                    error_msg = "信箱 "
-                if len(passowrd_check) != 1:
-                    error_msg = error_msg+"密碼 "
+                error_msg = "帳號密碼"
                 errorr_message = jsonify({
                 "error": True,
                 "message": error_msg+"有誤"
@@ -147,7 +142,6 @@ def user():
 
         # Save password with hash coding		
         user_password = bcrypt.generate_password_hash(password=user_password)
-
         if name_check == [] and email_check == []:					
             sql_command = """
             INSERT INTO user (name, email, password)
