@@ -75,7 +75,7 @@ function loadData(data){
     return TPC_attraction_information;
 }
 // Creat element from load data
-function createElement(TPC_attraction_information){
+function createAtt(TPC_attraction_information){
 
     let fetchDataId="#fetchData";
     let mainData = document.querySelector(fetchDataId);
@@ -167,8 +167,8 @@ function fetchAndCreatData(){
     }).then(function(data)
     {
         TPC_attraction_information=loadData(data);
-        thisPageQty=createElement(TPC_attraction_information);
-        // observer.observe(target);
+        console.log("Time")
+        thisPageQty=createAtt(TPC_attraction_information);
         page = data["nextPage"];
         return thisPageQty;
     });
@@ -264,6 +264,7 @@ let searchBarButton = document.querySelector(".searchBarButton")
 searchBarButton.addEventListener("click",searchAttraction);
 
 async function searchAttraction(){
+    onloadCount+=1
     // Remove Data
     let fetchDataSelect = document.querySelector("#fetchData");
     fetchDataSelect.remove();
@@ -278,13 +279,13 @@ async function searchAttraction(){
     page = 0
     keywordDiv = document.querySelector("#keyword");
     keyword = keywordDiv.value;
+    console.log("here")
     thisPageQty=await fetchAndCreatData();
     console.log("thisPageQty",thisPageQty)
     // If no Data
     if (thisPageQty== 0){
         let mainFetchDataSelect = document.querySelector("#fetchData");
-        mainFetchDataSelect.style = `
-            
+        mainFetchDataSelect.style = `            
             justify-content:center;
             display: inline-flex;
             `
@@ -304,6 +305,7 @@ let target = document.querySelector("footer");
 let callback = (entries,observer) => {
     entries.forEach(entry => {
         if (page != null) {
+            console.log("page",page)
             fetchAndCreatData(); 
         } 
         else {
@@ -311,13 +313,24 @@ let callback = (entries,observer) => {
         }        
     });
 };
-let options={
-    root:null,
-    // rootMargin: '100px',
-    threshold: 0,
-}
+
+
+
+let options = {
+  root: null,
+//   rootMargin: `0px 106px 130px 40px`,
+  threshold: 0.5,
+};
 let observer = new IntersectionObserver(callback, options);
-observer.observe(target);
+let onloadCount = 0
+window.onload = ()=>{
+    console.log("onloadCount",onloadCount)
+    if (onloadCount == 0){
+    observer.observe(target);
+    console.log("onloadCount",onloadCount)
+    }
+}
+
 function pageReturn0(){
-    page=0;
+    // page=0;
 }
