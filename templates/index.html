@@ -3,33 +3,102 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
         <meta charset="utf-8" />
-        <title>Taipei Day Trip</title>
+        
+{% block title %}
+        <title>台北一日遊</title>
         <link rel="stylesheet", type="text/css", href="../static/tpdt.css" />
-        <script src="../static/fetch.js" defer></script>        
+        <script src="../static/user.js" defer></script> 
+        <script src="../static/fetch.js" defer></script>     
+{% endblock %}   
     </head>
     <body>
         <!-- header -->
         <header class="topFreezeBackgroung">
             <nav class="topTitle">
-                <p class="topLeftTitleText">
+                <a class="topLeftTitleText" href="/">
                     台北一日遊
-                </p>
+                </a>
                             
                 <div class="topRightOptions">
-                    <div class="topRightButton">
-                        <!-- <div calss="topRightButtonDesign" onclack=""> -->
-                            排定行程
-                        <!-- </div> -->
+                    <div class="arrangeSchedule">                        
+                        排定行程
                     </div>
-                    <div class="topRightButton">
-                        <!-- <div calss="topRightButtonDesign" onclack=""> -->
-                            登入/註冊
-                        <!-- </div> -->
-                    </div>  
+                    <div class="signInButton" id="signInButton" onclick="signInBlock();">
+                        登入/註冊
+                    </div>
+                    <div class="signOutButton" id="signOutButton" onclick="signOut();">
+                        登出會員
+                    </div>
                 </div>
             </nav>
         </header>
+        <!-- User Interface-->
+        <!-- SignIn -->
 
+        <div class="signFilter" id="signFilter"></div>
+        <div class="signIn" id="signIn">
+            <div class="topDecoratorBar"></div>
+            <div class="titleAndCloseBlock">
+                <div class="signInTitle">
+                    登入會員帳號
+                </div>
+                <div class="closeImage" onclick="closeSignWindow()">
+                    <img src="../static/image/close.png" >
+                </div>
+            </div>
+            <div class="signInEmailBlock">
+                <input type="text" class="signInEmail" id="signInEmail" placeholder="輸入電子信箱" name="signInEmail">
+            </div>
+            <div class="signInPasswordBlock">
+                <input type="password" class="signInPassword" id="signInPassword" placeholder="輸入密碼" name="signInPassword">
+            </div>
+            <div class="singInButtonBlock" onclick="signIn();">
+                <div class="singInButton">登入帳戶</div>
+            </div>
+ 
+            <div class="signInJudge" id="signInJudge">
+            </div>
+            
+            <div class="signInQuestionBlock" onclick="signUpBlock();">
+                <div class="clickToSignUp">
+                    還沒有帳戶？ 點此註冊
+                </div>
+            </div>
+        </div>
+        <!-- SignUp -->
+        <div class="signUp" id="signUp">
+            <div class="topDecoratorBar"></div>
+            <div class="titleAndCloseBlock">
+                <div class="signUpTitle">
+                    註冊會員帳號
+                </div>
+                <div class="closeImage" onclick="closeSignWindow()">
+                    <img src="../static/image/close.png" >
+                </div>
+            </div>
+            <div class="signUpNameBlock">
+                <input type="text" class="signUpName" id="signUpName" placeholder="輸入姓名" name="signUpName">
+            </div>
+            <div class="signUpEmailBlock">
+                <input type="text" class="signUpEmail" id="signUpEmail" placeholder="輸入電子信箱" name="signUpEmail">
+            </div>
+            <div class="signUpPasswordBlock">
+                <input type="password" class="signUpPassword" id="signUpPassword" placeholder="輸入密碼" name="signUpPassword">
+            </div>
+            <div class="singUpButtonBlock" onclick="signUp();">
+                <div class="singUpButton">註冊新帳戶</div>
+            </div>
+
+            <div class="signUpJudge" id="signUpJudge">
+            </div>
+            <div class="signUpQuestionBlock" onclick="signInBlock();">
+                <div class="clickToSignIn">
+                    已經有帳戶了？ 點此登入
+                </div>
+            </div>
+        </div>
+
+{% block content %}
         <!-- Main image -->
         <main>
             <div class="mainImage">
@@ -56,14 +125,15 @@
                     </div>
                 </div>
             </div>
-
+            
             <!-- Fetch Attractions data -->
             <div id="mainFetchData" class="mainFetchData">
                 <div id="fetchData" class="fetchData">
                 </div>
             </div>
+
         </main>
-        
+{% endblock %}
         <!-- footer -->
         <footer>
             <p>

@@ -1,36 +1,14 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
-        <meta charset="utf-8" />
-        <title>Taipei Day Trip</title>
+{% extends 'index.html' %}
+
+{% block title %}
+        <script src="../static/user.js" defer></script> 
         <link rel="stylesheet", type="text/css", href="../static/tpdt.css" />
         <link rel="stylesheet", type="text/css", href="../static/attraction.css" />
-        <script src="../static/attraction.js" defer></script>        
-    </head>
-    <body>
-        <!-- header -->
-        <header class="topFreezeBackgroung">
-            <nav class="topTitle">
-                <p class="topLeftTitleText">
-                    台北一日遊
-                </p>                            
-                <div class="topRightOptions">
-                    <div class="topRightButton">
-                        <!-- <div calss="topRightButtonDesign" onclack=""> -->
-                            排定行程
-                        <!-- </div> -->
-                    </div>
-                    <div class="topRightButton">
-                        <!-- <div calss="topRightButtonDesign" onclack=""> -->
-                            登入/註冊
-                        <!-- </div> -->
-                    </div>  
-                </div>
-            </nav>
-        </header>
-        <!-- Main -->
-        <!-- <button onclick="test();">test</button> -->
+        <script src="../static/attraction.js" defer></script>   
+        <title>台北一日遊</title>
+{% endblock %}
+
+{% block content %}
         <main>
             <!-- Section 1 Image and Booking -->
             <section class="section1ImageAndBooking">
@@ -47,11 +25,4 @@
                 <div id="transport" class="content"></div>
             </section>
         </main>
-        <!-- footer -->
-        <footer>
-            <p>
-                COPYRIGHT © 2021 台北一日遊
-            </p>
-        </footer>               
-    </body>
-</html>
+{% endblock %}

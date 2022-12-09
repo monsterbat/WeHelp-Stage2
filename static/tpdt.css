@@ -49,13 +49,14 @@ header nav .topLeftTitleText{
     /* identical to box height, or 113% */
     /* Primary Color/Cyan 70 */
     color: #448899;
+    text-decoration: none;
 
 }
 header nav .topRightOptions{
     display: flex;      
 }
 
-header nav .topRightOptions .topRightButton{
+header nav .topRightOptions .arrangeSchedule{
     margin: 10px;
     font-family: "Noto Sans TC";
     font-weight: 500;
@@ -63,9 +64,27 @@ header nav .topRightOptions .topRightButton{
     line-height: 13.3px;
     color: #666666;
     cursor: pointer;
-
 }
-
+header nav .topRightOptions .signInButton{
+    display: none;
+    margin: 10px;
+    font-family: "Noto Sans TC";
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 13.3px;
+    color: #666666;
+    cursor: pointer;
+}
+header nav .topRightOptions .signOutButton{
+    display: none;
+    margin: 10px;
+    font-family: "Noto Sans TC";
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 13.3px;
+    color: #666666;
+    cursor: pointer;
+}
 /* ***********************************************/
 /* ******************* slogan ********************/
 /* ***********************************************/
@@ -143,6 +162,276 @@ main{
     /* Secondary Color/Gray 10 */
     color: #F8F8F8;
 }
+/* ***********************************************/
+/* **************** Sign In Up *******************/
+/* ***********************************************/
+/* Black Filter */
+.signFilter{
+    position: fixed;
+    display: none;
+    /* position: absolute; */
+    background-color: #000000;
+    z-index: 150;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+}
+/* Sign in*/
+.signIn,
+.signUp{
+    position:fixed;
+    /* position: absolute; */
+    top: 65px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    /* position: sticky; */
+    display: none;
+    /* justify-content: center; */
+    flex-direction: column;
+    align-items: center;
+    z-index: 200;
+    width: 340px;
+    height: auto;
+    background-color: #FFFFFF;
+    
+}
+.topDecoratorBar{
+    width: 340px;
+    height: 10px;
+    left: 0px;
+    top: 0px;
+
+    /* Additional Color/Dark Cyan Gradient (0deg) */
+
+    background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+}
+/* =========================================================== */
+.signUp .titleAndCloseBlock,
+.signIn .titleAndCloseBlock{
+    position: relative;
+    height: auto;
+    align-items:top;
+    align-content: center;
+}
+.signUp .titleAndCloseBlock .closeImage,
+.signIn .titleAndCloseBlock .closeImage{    
+    position: absolute;
+    display: inline-flex; 
+    right: 15px;
+    top:25%;
+    z-index: 300;
+    background: #cacccd;
+    border-radius: 19px;
+    cursor: pointer;    
+}
+.signUp .titleAndCloseBlock .closeImage :hover,
+.signIn .titleAndCloseBlock .closeImage :hover{
+    background: #a5abae;
+    border-radius: 19px;
+}
+.signUp .titleAndCloseBlock .closeImage img,
+.signIn .titleAndCloseBlock .closeImage img{
+    flex-direction: column;
+    align-items: center;
+}
+
+/* =========================================================== */
+.signIn .titleAndCloseBlock .signInTitle,
+.signUp .signUpTitle{
+    /* position: absolute; */
+    width: 310px;
+    height: 27px;
+    /* left: 0px; */
+    top: 0px;
+
+    /* Header 3 - Blod 24(24) */
+
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    /* or 100% */
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+
+    /* Secondary Color/Gray 70 */
+
+    color: #666666;
+    margin: 15px;
+}
+
+
+.signUp .signUpNameBlock,
+.signUp .signUpEmailBlock,
+.signUp .signUpPasswordBlock,
+.signIn .signInEmailBlock,
+.signIn .signInPasswordBlock{
+    /* position: absolute; */
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    color: #757575;
+    justify-content: center;
+    align-items: center;
+    
+    width: 310px;
+    height: 47px;
+    /* left: 0px; */
+    /* top: 0px; */
+
+
+    background: #FFFFFF;
+
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+    display: inline-flex;
+    margin: 5px;
+}
+
+.signUp .signUpNameBlock .signUpName,
+.signUp .signUpEmailBlock .signUpEmail,
+.signUp .signUpPasswordBlock .signUpPassword,
+.signIn .signInEmailBlock .signInEmail,
+.signIn .signInPasswordBlock .signInPassword{
+    /* position: absolute; */
+    display: flex;
+    border: none;
+    outline: none;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    
+    width: 280px;
+    height: 17px;
+    left: 15px;
+    top: 15px;
+
+    /* Body - Med 16(13.3) */
+
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 13px;
+    /* or 83% */
+
+    align-items: center;
+
+    /* Secondary Color/Gray 50 */
+
+    color: #757575;
+}
+
+.signUp .singUpButtonBlock,
+.signIn .singInButtonBlock{
+    display: inline-flex;
+    /* position: absolute; */
+    width: 310px;
+    height: 47px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* left: 0px; */
+    /* top: 156px; */
+    /* Primary Color/Cyan 70 */
+    background: #448899;
+    border-radius: 5px;
+    margin: 5px;
+    color: #FFFFFF;
+    cursor: pointer;
+    
+}
+.signUp .singUpButtonBlock:hover,
+.signIn .singInButtonBlock:hover{
+    background: #508b9a;        
+}
+
+.signUp .singUpButtonBlock .singUpButton
+.signIn .singInButtonBlock .singInButton{
+    
+    width: 270px;
+    height: 27px;
+    /* left: 20px;
+    top: 10px; */
+
+    /* Button - Reg 19(16) */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 16px;
+    /* or 84% */
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    /* Additional Color/White */
+
+    color: #FFFFFF;
+}
+
+
+.signIn .signInJudge{
+    display: none;
+    width: 310px;
+    height: 22px;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 13px;
+    color: #ad3838;
+    align-items: center;
+    text-align: center;
+    justify-self: center;
+    margin: 5px;
+}
+.signUp .signUpJudge{
+    display: none;
+    width: 310px;
+    height: 22px;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 13px;
+    color: #ad3838;
+    align-items: center;
+    text-align: center;
+    justify-self: center;
+    margin: 5px;
+}
+
+.signUp .signUpQuestionBlock,
+.signIn .signInQuestionBlock{
+    display: inline-flex;
+}
+/* .signIn .signInQuestionBlock :hover{
+    background-color: #e60505;
+} */
+.signUp .signUpQuestionBlock .clickToSignIn,
+.signIn .signInQuestionBlock .clickToSignUp{
+    width: 310px;
+    height: 22px;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 13px;
+    color: #666666;
+    align-items: center;
+    text-align: center;
+    justify-self: center;
+    margin: 5px;
+    cursor: pointer;
+}
+
 /* ***********************************************/
 /* ******************** Search *******************/
 /* ***********************************************/
@@ -253,6 +542,17 @@ main{
     grid-gap: 15px;
     padding: 10px;
 }  
+
+.mainFetchData .fetchData .fetchNoData{
+    display:flex;
+    width: 100%;
+    height: 100px;
+    background:#bcbcbc;
+    border-radius: 5px;
+    justify-content:center;
+    align-content:center;
+    align-items:center;
+}
 
 .fetchData .imageBlock{
     width: 270px;
@@ -390,6 +690,16 @@ footer p{
         width: 100%;
         grid-template-columns: repeat(2, 1fr);
       }
+    .mainFetchData .fetchData .fetchNoData{
+        display:flex;
+        width: 100%;
+        height: 50px;
+        background:#bcbcbc;
+        border-radius: 5px;
+        justify-content:center;
+        align-content:center;
+        align-items:center;
+    }
     .fetchData .imageBlock .imageTextBox{
         height: 45px;
     }
