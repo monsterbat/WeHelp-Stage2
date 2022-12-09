@@ -49,6 +49,7 @@ header nav .topLeftTitleText{
     /* identical to box height, or 113% */
     /* Primary Color/Cyan 70 */
     color: #448899;
+    text-decoration: none;
 
 }
 header nav .topRightOptions{
