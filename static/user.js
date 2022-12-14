@@ -6,6 +6,7 @@ let signFilter = document.getElementById("signFilter")
 let signUpJudge = document.getElementById("signUpJudge")
 let signInJudge = document.getElementById("signInJudge")
 
+let userStatusShow = "1"
 // Sign in or out status show
 userStatus();
 async function userStatus(){
@@ -18,9 +19,11 @@ async function userStatus(){
     }).then(function(data){
         if(data.data == null || data.error == true){
             signInButton.style.display = "block"
+            // userStatusShow = "no"
         }
         else{
             signOutButton.style.display = "block"
+            // userStatusShow = "yes"
         }
     })
 }
@@ -38,6 +41,7 @@ async function signOut(){
     }).then(function(data){
         signInButton.style.display = "block"
         signOutButton.style.display = "none"
+        location.reload();
     })
 }
 
@@ -127,4 +131,21 @@ function closeSignWindow(){
     signFilter.style.display = "none"
     signInWindow.style.display = "none"
     signUpWindow.style.display = "none"
+}
+
+async function arrangeSchedule(){
+    let url = `/api/user/auth`
+    await fetch(url,{
+        method:"GET",
+    }).then(function(response){
+        console.log("url",url)
+        return response.json();
+    }).then(function(data){
+        if(data.data == null || data.error == true){
+            signInBlock();
+        }
+        else{
+            window.location.href = "/booking"
+        }
+    })
 }

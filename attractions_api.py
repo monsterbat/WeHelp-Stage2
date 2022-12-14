@@ -100,7 +100,7 @@ def attractions():
 	except:
 		errorr_message = jsonify({
             "error": True,
-            "message": "請按照情境提供對應的錯誤訊息"
+            "message": "伺服器內部錯誤"
         })
 		return errorr_message,500
 
@@ -155,14 +155,14 @@ def attractionId(attractionId):
 		else:
 			errorr_message = jsonify({
             "error": True,
-            "message": "請按照情境提供對應的錯誤訊息"
+            "message": "景點編號不正確"
         })
 		return errorr_message,400
 	# Unexcept situation
 	except:
 		errorr_message = jsonify({
             "error": True,
-            "message": "請按照情境提供對應的錯誤訊息"
+            "message": "伺服器內部錯誤"
         })
 		return errorr_message,500
 
@@ -188,6 +188,6 @@ def categories():
 	except:
 		errorr_message = jsonify({
             "error": True,
-            "message": "請按照情境提供對應的錯誤訊息"
+            "message": "伺服器內部錯誤"
         })
 		return errorr_message,500

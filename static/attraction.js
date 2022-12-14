@@ -122,7 +122,8 @@ function createElement(TPC_attraction_information){
     // 日期Block
     let dataChooseBlock = document.createElement("div")
     dataChooseBlock.setAttribute("id","dataChooseBlock")
-    dataChooseBlock.setAttribute("class","dataChooseBlock")    
+    dataChooseBlock.setAttribute("class","dataChooseBlock") 
+    // dataChooseBlock.setAttribute("onclick","showPrice();")   
     bookingShow.appendChild(dataChooseBlock)
     // 選擇日期
     let dataChooseTitle = document.createElement("div")
@@ -138,7 +139,13 @@ function createElement(TPC_attraction_information){
     dataInput.setAttribute("onclick","showPrice();")
     dataChooseBlock.appendChild(dataInput)
 
-    // ======日期========
+    let noDateInputAlarm = document.createElement("div")
+    noDateInputAlarm.setAttribute("id","noDateInputAlarm")
+    noDateInputAlarm.setAttribute("class","noDateInputAlarm")
+    noDateInputAlarm.textContent = "請選擇日期"
+    dataChooseBlock.appendChild(noDateInputAlarm)
+
+    // ======時間========
     // 時間Block
     let timeChooseBlock = document.createElement("div")
     timeChooseBlock.setAttribute("id","timeChooseBlock")
@@ -161,7 +168,7 @@ function createElement(TPC_attraction_information){
     timeChosenAm.setAttribute("class","timeChosen")
     timeChosenAm.setAttribute("name","timeChosen")
     timeChosenAm.setAttribute("type","radio")
-    timeChosenAm.setAttribute("value","am")
+    timeChosenAm.setAttribute("value","morning")
     timeChosenAm.setAttribute("onclick","showPrice();")
     timeChosenBlock.appendChild(timeChosenAm)
     let timeChosenAmOption = document.createElement("label")
@@ -174,7 +181,7 @@ function createElement(TPC_attraction_information){
     timeChosenPm.setAttribute("class","timeChosen")
     timeChosenPm.setAttribute("name","timeChosen")
     timeChosenPm.setAttribute("type","radio")
-    timeChosenPm.setAttribute("value","pm")
+    timeChosenPm.setAttribute("value","afternoon")
     timeChosenPm.setAttribute("onclick","showPrice();")
     timeChosenBlock.appendChild(timeChosenPm)
     let timeChosenPmOption = document.createElement("label")
@@ -182,6 +189,12 @@ function createElement(TPC_attraction_information){
     timeChosenPmOption.setAttribute("class","timeChosenPmOption")
     timeChosenPmOption.textContent = "下半天"
     timeChosenBlock.appendChild(timeChosenPmOption)
+
+    let noTimeInputAlarm = document.createElement("div")
+    noTimeInputAlarm.setAttribute("id","noTimeInputAlarm")
+    noTimeInputAlarm.setAttribute("class","noTimeInputAlarm")
+    noTimeInputAlarm.textContent = "請選擇時間"
+    timeChooseBlock.appendChild(noTimeInputAlarm)
 
     // =====導覽費用====
     // 導覽費用Block
@@ -205,6 +218,7 @@ function createElement(TPC_attraction_information){
     let startButton = document.createElement("div")
     startButton.setAttribute("id","startButton")
     startButton.setAttribute("class","startButton")
+    startButton.setAttribute("onclick","goToBooking();")
     startButton.textContent = "開始預約行程"
     bookingShow.appendChild(startButton)
 
@@ -221,17 +235,23 @@ function createElement(TPC_attraction_information){
     transport.textContent = attractionTransport
     return attractionImg
 }
+let bookingTime = ""
+let bookingPrice = ""
 function showPrice(){
-    let dataInputResult = document.querySelector('#dataInput');
+    let dataInputResult = document.getElementById('dataInput');
     let timeChosenResult = document.querySelector('input[name="timeChosen"]:checked');
-    let guidePrice = document.querySelector('#guidePrice');
+    let guidePrice = document.getElementById('guidePrice');
     if (dataInputResult.value != 0 & timeChosenResult != null){
         console.log("dataInputResult",dataInputResult.value)
-        if (timeChosenResult.value == "am"){
+        if (timeChosenResult.value == "morning"){
             guidePrice.innerHTML = "新台幣 2000 元"
+            bookingTime = "morning"   
+            bookingPrice = "2000"    
         }
-        if (timeChosenResult.value == "pm"){
+        if (timeChosenResult.value == "afternoon"){
             guidePrice.innerHTML = "新台幣 2500 元"
+            bookingTime = "afternoon"
+            bookingPrice = "2500" 
         }
     }
 }
@@ -270,6 +290,75 @@ function bottomIconChange(imageCount){
         bottomCircleCurrent.src = srcChange
     }
 }
+
+// Booking page
+async function goToBooking(){
+
+    let url = `/api/user/auth`
+    await fetch(url,{
+        method:"GET",
+    }).then(function(response){
+        console.log("url",url)
+        return response.json();
+    }).then(function(data){
+        if(data.data == null || data.error == true){
+            console.log("ff",signInButton)
+            
+            signInBlock();
+            console.log("ff2")
+            // userStatusShow = "no"
+        }
+        else{
+            console.log(userStatusShow)
+            let noDateInputAlarm = document.getElementById("noDateInputAlarm")
+            let noTimeInputAlarm = document.getElementById("noTimeInputAlarm")
+            noDateInputAlarm.style.display = "none"
+            noTimeInputAlarm.style.display = "none"
+            let attractionId = location.href.split("/").slice(-1)[0];
+            let date = document.getElementById("dataInput").value;
+            let time = bookingTime;
+            console.log("D")
+            console.log("date",date)
+            console.log("time",time)
+            if (date == ""){
+                console.log("date",date)
+                noDateInputAlarm.style.display = "flex"
+            }
+            if (time == ""){
+                console.log("time",time)
+                noTimeInputAlarm.style.display = "flex"
+            }
+            else{
+                let price = bookingPrice
+                let data = {
+                    "attractionId": attractionId,
+                    "date": date,
+                    "time": time,
+                    "price": price
+                }
+                console.log("data",data)
+                let url = `/api/booking`
+                fetch(url,{
+                    method:"POST",
+                    body:JSON.stringify(data),
+                    headers:new Headers({
+                        "Content-Type":"application/json"
+                    })
+                }).then(function(response){
+                    // console.log("D2",data)
+                    return response.json();
+                }).then(function(data){
+                    // console.log(data)
+                })  
+                window.location.href = "/booking"  
+            }
+
+        }
+    })
+
+    
+}
+
 // test
 function test(){
 

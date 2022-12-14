@@ -1,6 +1,6 @@
 """
 WeHelp BootCamp Assignemt - Stage 2 taipei_day_trip -*- main program -*-
-Update date: 2022/12/08
+Update date: 2022/12/14
 Authored by SC Siao
 """
 
@@ -8,6 +8,7 @@ from flask import *
 from flask_cors import CORS
 import user_api
 import attractions_api
+import booking_api
 
 app=Flask(
 	__name__,
@@ -18,7 +19,7 @@ CORS(app)
 
 app.register_blueprint(user_api.user_api)
 app.register_blueprint(attractions_api.attractions_api)
-
+app.register_blueprint(booking_api.booking_api)
 # Pages
 @app.route("/")
 def index():
@@ -28,6 +29,9 @@ def attraction(id):
 	return render_template("attraction.html")
 @app.route("/booking")
 def booking():
+	token = request.cookies.get('token')
+	if token == None:
+		return redirect("/")
 	return render_template("booking.html")
 @app.route("/thankyou")
 def thankyou():

@@ -314,23 +314,28 @@ let callback = (entries,observer) => {
     });
 };
 
+let headerDiv = document.querySelector("header")
+let mainDIV = document.querySelector("main")
 
+let headerDivHeight = headerDiv.offsetHeight
+let sloganDivHeight = mainDIV.offsetHeight
+let windowHeight = window.innerHeight
 
-let options = {
+let rootMarginTop = (headerDivHeight+sloganDivHeight)-windowHeight
+
+console.log(rootMarginTop)
+
+const options = {
   root: null,
-//   rootMargin: `0px 106px 130px 40px`,
-  threshold: 0.5,
+  rootMargin: `${rootMarginTop}px 0px 0px 0px`,
+  threshold: 0,
 };
+
 let observer = new IntersectionObserver(callback, options);
 let onloadCount = 0
-window.onload = ()=>{
-    console.log("onloadCount",onloadCount)
-    if (onloadCount == 0){
-    observer.observe(target);
-    console.log("onloadCount",onloadCount)
-    }
-}
+
+observer.observe(target);
 
 function pageReturn0(){
-    // page=0;
+    page=0;
 }

@@ -248,6 +248,31 @@ main .section1ImageAndBooking .nameAndBooking .bookingBlock .dataChooseBlock .da
 
     cursor: pointer;
 }
+
+main .section1ImageAndBooking .nameAndBooking .bookingBlock .dataChooseBlock .noDateInputAlarm{
+    position: absolute;
+    width: 81px;
+    height: 17px;
+    left: 260px;
+    top: 9px;
+
+    /* Body - Bold 16(13.3) */
+
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 13px;
+    /* or 83% */
+
+    display: none;
+    align-items: center;
+
+    /* Secondary Color/Gray 70 */
+
+    color: #ff0000;
+}
+
 main .section1ImageAndBooking .nameAndBooking .bookingBlock .timeChooseBlock{
     position: absolute;
     display: flex;
@@ -292,6 +317,31 @@ main .section1ImageAndBooking .nameAndBooking .bookingBlock .timeChooseBlock .ti
     left: 86px;
     top: 0px;
 }
+
+main .section1ImageAndBooking .nameAndBooking .bookingBlock .timeChooseBlock .noTimeInputAlarm{
+    position: absolute;
+    width: 81px;
+    height: 17px;
+    left: 260px;
+    top: 9px;
+
+    /* Body - Bold 16(13.3) */
+
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 13px;
+    /* or 83% */
+
+    display: none;
+    align-items: center;
+
+    /* Secondary Color/Gray 70 */
+
+    color: #ff0000;
+}
+
 /* ====== */
 main .section1ImageAndBooking .nameAndBooking .bookingBlock .timeChooseBlock .timeChosenBlock input[type='radio']:after{
     position: absolute;
@@ -451,6 +501,9 @@ main .section1ImageAndBooking .nameAndBooking .bookingBlock .startButton{
     flex-grow: 0;
 
     cursor: pointer;
+}
+main .section1ImageAndBooking .nameAndBooking .bookingBlock .startButton:hover{
+    background: #53a5ba;
 }
 
 main .spacer{

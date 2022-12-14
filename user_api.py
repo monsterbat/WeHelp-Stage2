@@ -53,7 +53,7 @@ def auth():
         except:
             errorr_message = {
                 "error": True,
-                "message": "請按照情境提供對應的錯誤訊息"
+                "message": "伺服器內部錯誤"
             }
             return errorr_message,500
     if request.method == "PUT":
@@ -97,7 +97,7 @@ def auth():
         except:
             errorr_message = jsonify({
                 "error": True,
-                "message": "請按照情境提供對應的錯誤訊息"
+                "message": "伺服器內部錯誤"
             })
             return errorr_message,500
     if request.method == "DELETE":
@@ -109,7 +109,7 @@ def auth():
         except:
             errorr_message = {
                 "error": True,
-                "message": "請按照情境提供對應的錯誤訊息"
+                "message": "伺服器內部錯誤"
             }
             return errorr_message,500
 
@@ -168,6 +168,6 @@ def user():
     except:
         errorr_message = jsonify({
             "error": True,
-            "message": "請按照情境提供對應的錯誤訊息"
+            "message": "伺服器內部錯誤"
         })
         return errorr_message,500
