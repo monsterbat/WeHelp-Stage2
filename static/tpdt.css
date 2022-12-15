@@ -34,6 +34,9 @@ header nav{
     justify-content:space-between;
     align-items: center;
 }
+header nav .topLeftTitleText:hover{
+    color: #53a9be;
+}
 header nav .topLeftTitleText{
     /* 台北一日遊 */
     width: 150px;
@@ -55,7 +58,9 @@ header nav .topLeftTitleText{
 header nav .topRightOptions{
     display: flex;      
 }
-
+header nav .topRightOptions .arrangeSchedule:hover{
+    font-size: 17px;
+}
 header nav .topRightOptions .arrangeSchedule{
     margin: 10px;
     font-family: "Noto Sans TC";
@@ -64,6 +69,9 @@ header nav .topRightOptions .arrangeSchedule{
     line-height: 13.3px;
     color: #666666;
     cursor: pointer;
+}
+header nav .topRightOptions .signInButton:hover{
+    font-size: 17px;
 }
 header nav .topRightOptions .signInButton{
     display: none;
@@ -74,6 +82,9 @@ header nav .topRightOptions .signInButton{
     line-height: 13.3px;
     color: #666666;
     cursor: pointer;
+}
+header nav .topRightOptions .signOutButton:hover{
+    font-size: 17px;
 }
 header nav .topRightOptions .signOutButton{
     display: none;
