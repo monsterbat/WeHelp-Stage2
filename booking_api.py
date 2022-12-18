@@ -32,9 +32,8 @@ def booking():
     WHERE email=%s;
     """
     value_input = (user_email,)
-    
     user_info = query_data(sql_command,value_input)
-    user_id = user_info[0][0]
+    user_id = user_info[0]["id"]
 
     if user_info == []:
         verify_msg = jsonify({
@@ -55,10 +54,10 @@ def booking():
             """
             value_input = (user_id,)
             booking_info = query_data(sql_command,value_input)
-            # print(booking_info)
             if booking_info != []:
                 # Attraction inf
-                attraction_id = booking_info[0][2]
+                attraction_id = booking_info[0]["attraction_id"]
+
                 sql_command="""
                 SELECT id,name,address
                 FROM attraction 
@@ -66,7 +65,6 @@ def booking():
                 """
                 value_input = (attraction_id,)
                 attraction_info = query_data(sql_command,value_input)
-
                 # Attraction img inf
                 sql_command="""
                 SELECT attraction_id,images FROM attraction
@@ -75,22 +73,20 @@ def booking():
                 """
                 value_input=(attraction_id,)
                 attraction_img = query_data(sql_command,value_input)
-
                 data = {
                     "data":{
                         "attraction":{
-                            "id": attraction_info[0][0],
-                            "name":attraction_info[0][1],
-                            "address":attraction_info[0][2],
-                            "image":attraction_img[0][1]
+                            "id": attraction_info[0]["id"],
+                            "name":attraction_info[0]["name"],
+                            "address":attraction_info[0]["address"],
+                            "image":attraction_img[0]["images"]
                         },
-                        "date":booking_info[0][3],
-                        "time":booking_info[0][4],
-                        "price":int(booking_info[0][5])
+                        "date":booking_info[0]["date"],
+                        "time":booking_info[0]["time"],
+                        "price":int(booking_info[0]["price"])
                     }
                 }
-            
-            pprint.pprint(data)
+        
             return data,200
 
         except:
@@ -140,15 +136,12 @@ def booking():
             return errorr_message,500
     if request.method == "DELETE":
         try:
-            print("here1")
             sql_command = """
             DELETE FROM booking 
             WHERE user_id = %s;
             """
             value_input = (user_id,)
-            print("here2")
             insert_or_update_data(sql_command,value_input)
-            print("here3")
             data=jsonify({"ok":True})
             return data
         except:

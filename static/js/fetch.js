@@ -1,9 +1,4 @@
-// WeHelp BootCamp Assignemt - Stage 2 taipei_day_trip -*- index fetch data js -*-
-// Update date: 2022/11/28
-// Authored by SC Siao
 
-// api URL
-// let keyword = document.getElementById("keyword").value;
 let page = 0;
 let keyword = "";
 let domainAndPort=""

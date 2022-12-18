@@ -1,5 +1,6 @@
 from flask import *
 from MySQL_con import *
+import pprint
 
 attractions_api = Blueprint(
     "attractions_api",
@@ -37,22 +38,24 @@ def attractions():
 		
 		data_result=[]
 		count=0
+		
 		while count<len(attraction_info):
 			data={}
-			data["id"] = attraction_info[count][0]
-			data["name"] = attraction_info[count][1]
-			data["category"] = attraction_info[count][2]
-			data["description"] = attraction_info[count][3]
-			data["address"] = attraction_info[count][4]
-			data["transport"] = attraction_info[count][5]
-			data["mrt"] = attraction_info[count][6]
-			data["lat"] = attraction_info[count][7]
-			data["lng"] = attraction_info[count][8]
+			data["id"] = attraction_info[count]["id"]
+			data["name"] = attraction_info[count]["name"]
+			data["category"] = attraction_info[count]["category"]
+			data["description"] = attraction_info[count]["description"]
+			data["address"] = attraction_info[count]["address"]
+			data["transport"] = attraction_info[count]["transport"]
+			data["mrt"] = attraction_info[count]["mrt"]
+			data["lat"] = attraction_info[count]["lat"]
+			data["lng"] = attraction_info[count]["lng"]
+
 			# attraction image
 			data_image_ls=[]
 			data_image=[]
 			id_check=data["id"]
-			
+
 			# With keyword 
 			if keyword!=False:
 				sql_command="""
@@ -62,6 +65,7 @@ def attractions():
 				"""	
 				sql_input=(keyword,id_check,"%"+keyword+"%",id_check)
 				attraction_img=query_data(sql_command,sql_input)
+				
 			# WithOut keyword
 			else:
 				sql_command="""
@@ -74,7 +78,7 @@ def attractions():
 			
 			count_image=0
 			while count_image<len(attraction_img):
-				data_image_ls=[attraction_img[count_image][1]]
+				data_image_ls=[attraction_img[count_image]["images"]]
 				data_image.extend(data_image_ls)
 				count_image+=1
 			data["images"]=data_image
@@ -119,15 +123,15 @@ def attractionId(attractionId):
 			data_result=[]
 			count=0
 			data={}
-			data["id"] = attraction_info[count][0]
-			data["name"] = attraction_info[count][1]
-			data["category"] = attraction_info[count][2]
-			data["description"] = attraction_info[count][3]
-			data["address"] = attraction_info[count][4]
-			data["transport"] = attraction_info[count][5]
-			data["mrt"] = attraction_info[count][6]
-			data["lat"] = attraction_info[count][7]
-			data["lng"] = attraction_info[count][8]
+			data["id"] = attraction_info[count]["id"]
+			data["name"] = attraction_info[count]["name"]
+			data["category"] = attraction_info[count]["category"]
+			data["description"] = attraction_info[count]["description"]
+			data["address"] = attraction_info[count]["address"]
+			data["transport"] = attraction_info[count]["transport"]
+			data["mrt"] = attraction_info[count]["mrt"]
+			data["lat"] = attraction_info[count]["lat"]
+			data["lng"] = attraction_info[count]["lng"]
 			# attraction image
 			data_image_ls=[]
 			data_image=[]
@@ -140,7 +144,7 @@ def attractionId(attractionId):
 			attraction_img=query_data(sql_command,sql_input)
 			count_image=0
 			while count_image<len(attraction_img):
-				data_image_ls=[attraction_img[count_image][1]]
+				data_image_ls=[attraction_img[count_image]["images"]]
 				data_image.extend(data_image_ls)
 				count_image+=1
 			data["images"]=data_image
@@ -179,7 +183,7 @@ def categories():
 		categories_data=[]
 		count_categories=0
 		while count_categories<len(categories_raw_data):
-			data_categories_ls=[categories_raw_data[count_categories][0]]
+			data_categories_ls=[categories_raw_data[count_categories]["category"]]
 			categories_data.extend(data_categories_ls)
 			count_categories+=1
 		data["data"]=categories_data

@@ -28,6 +28,7 @@ def auth():
             else:
                 token_data = jwt.decode(token, jwt_key, algorithms="HS256")
                 user_email = token_data["email"]
+                
                 sql_command="""
                 SELECT id,name,email
                 FROM user 
@@ -43,9 +44,9 @@ def auth():
                     })
                 verify_msg = ({
                     "data":{
-                        "id":user_info[0][0],
-                        "name":user_info[0][1],
-                        "email":user_info[0][2]
+                        "id":user_info[0]["id"],
+                        "name":user_info[0]["name"],
+                        "email":user_info[0]["email"]
                     }
                 })
                 return verify_msg,200
@@ -71,8 +72,8 @@ def auth():
             user_check = query_data(sql_command,value_input)
             check_password = ""
             if user_check != []:
-                email_check = user_check[0][0]
-                passowrd_check = user_check[0][1]
+                email_check = user_check[0]["email"]
+                passowrd_check = user_check[0]["password"]
                 # Password with hash coding
                 check_password = bcrypt.check_password_hash(passowrd_check, user_password)
             if check_password == True:
