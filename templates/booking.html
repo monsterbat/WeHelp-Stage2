@@ -1,8 +1,9 @@
 {% extends 'index.html' %}
 
 {% block title %}
-<script src="../static/js/user.js" defer></script>
 <script src="../static/js/booking.js" defer></script> 
+<script src="../static/js/tappay.js" defer></script> 
+<script src="https://js.tappaysdk.com/sdk/tpdirect/v5.14.0"></script>
 <link rel="stylesheet", type="text/css", href="../static/css/tpdt.css" />
 <link rel="stylesheet", type="text/css", href="../static/css/booking.css" />
 {% endblock %}
@@ -70,7 +71,7 @@
         <!-- 1-3-4 -->
         <nav class="phoneBlock" id="phoneBlock">
             <div class="contant" id="contant">手機號碼：</div>
-            <input class="input" id="input" type="text" placeholder="輸入手機號碼" name="userPhone">
+            <input class="input" id="phoneInput" type="text" placeholder="輸入手機號碼" name="userPhone">
         </nav>
         <!-- 1-3-5 -->
         <div class="userWarning" id="userWarning">
@@ -86,17 +87,17 @@
         <!-- 1-5-2 -->
         <nav class="cardBlock" id="cardBlock">
             <div class="contant" id="contant">卡片號碼：</div>
-            <input class="input" id="input" type="text" placeholder="**** **** **** ****" name="cardNumber">
+            <div class="tpfield" id="card-number"></div>
         </nav>
         <!-- 1-5-3 -->
         <nav class="cardDateBlock" id="cardDateBlock">
             <div class="contant" id="contant">過期時間：</div>
-            <input class="input" id="input" type="text" placeholder="MM / YY" name="cardDate">
+            <div class="tpfield" id="card-expiration-date"></div>
         </nav>
         <!-- 1-5-4 -->
         <nav class="cardPasswordBlock" id="cardPasswordBlock">
             <div class="contant" id="contant">驗證密碼：</div>
-            <input class="input" id="input" type="text" placeholder="CVV" name="cardPassword">
+            <div class="tpfield" id="card-ccv"></div>
         </nav>
     </section>
     <!-- 1-6 -->
@@ -107,9 +108,10 @@
         <div class="totelPrice" id="totelPrice"></div>
         <!-- 1-7-2 -->
         <div class="right" id="right">
-            <a class="pay" id="pay">確認訂購並付款</a>
+            <div class="pay" id="pay">確認訂購並付款</div>
         </div>
     </section>
+    
     
 </main>
 {% endblock %}

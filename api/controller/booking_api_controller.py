@@ -1,14 +1,12 @@
 from flask import *
 from MySQL_con import *
-import jwt
-import time
-import pprint
+
 import sys
 sys.path.append('api/module')
 import booking_api_module
 
 booking_api_controller = Blueprint(
-    "booking_api",
+    "booking_api_controller",
     __name__,
     static_folder="static",
     static_url_path="/static",

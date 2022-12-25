@@ -14,7 +14,6 @@ async function userStatus(){
     await fetch(url,{
         method:"GET",
     }).then(function(response){
-        console.log("url",url)
         return response.json();
     }).then(function(data){
         if(data.data == null || data.error == true){
@@ -46,7 +45,6 @@ async function signOut(){
 }
 
 async function signIn(){
-    console.log("into signUp")
     let signInEmail = document.getElementById("signInEmail").value;
     let signInPassword = document.getElementById("signInPassword").value;
     let url = `/api/user/auth`
@@ -76,7 +74,6 @@ async function signIn(){
 }
 
 async function signUp(){
-    console.log("into signUp")
     let signUpName = document.getElementById("signUpName").value;
     let signUpEmail = document.getElementById("signUpEmail").value;
     let signUpPassword = document.getElementById("signUpPassword").value;    
@@ -138,7 +135,6 @@ async function arrangeSchedule(){
     await fetch(url,{
         method:"GET",
     }).then(function(response){
-        console.log("url",url)
         return response.json();
     }).then(function(data){
         if(data.data == null || data.error == true){
