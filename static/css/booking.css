@@ -189,6 +189,7 @@ main .userInformation .nameBlock,
 main .userInformation .emailBlock,
 main .userInformation .phoneBlock{
     display: flex;
+    align-items:center;
     margin-top: 10px;
     margin-bottom:10px;
 }
@@ -221,10 +222,16 @@ main .userInformation .phoneBlock .contant{
 main .userInformation .nameBlock .nameInput,
 main .userInformation .emailBlock .emailInput,
 main .userInformation .phoneBlock .input{
+    display: flex;
+    align-items:center;
+    height: 10px;
+    width: 300px;
+    border: 1px solid gray;
+    /* margin: 5px 0; */
+    padding: 5px;
     width: 180px;
     height: 18px;
-    left: 10px;
-    top: 10px;
+
 
     /* Body - Med 16(13.3) */
 
@@ -298,6 +305,7 @@ main .userPay .cardBlock,
 main .userPay .cardDateBlock,
 main .userPay .cardPasswordBlock{
     display: flex;
+    align-items: center;
     margin-top: 10px;
     margin-bottom:10px;
 }
@@ -345,12 +353,42 @@ main .userPay .cardPasswordBlock .input{
     /* or 83% */
 
     display: flex;
-    align-items: center;
+    align-items: center; 
 
     /* Secondary Color/Gray 50 */
 
     color: #757575;
 }
+/* 1-5-N-2 */
+.tpfield {
+    display: flex;
+    align-items:center;
+    height: 10px;
+    width: 300px;
+    border: 1px solid gray;
+    /* margin: 5px 0; */
+    padding: 5px;
+    width: 180px;
+    height: 18px;
+
+
+    /* Body - Med 16(13.3) */
+
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 13px;
+    /* or 83% */
+
+    display: flex;
+    align-items: center;
+
+    /* Additional Color/Black */
+
+    color: #000000;
+}
+
 /* 1-7 */
 main .payBlock{
     display: flex;

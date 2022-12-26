@@ -1,0 +1,63 @@
+main section{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+main section .thankyouTitle1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 26px;
+    color: #666666;
+    width: auto;
+    height: auto;
+
+
+    margin: 10px 0px 5px 0px;
+
+}
+main section .thankyouTitle2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 26px;
+    color: #666666;
+    width: auto;
+    height: auto;
+
+
+    margin: 5px;
+
+}
+main section .thankyouTitle3{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 26px;
+    color: #584242;
+    width: auto;
+    height: auto;
+
+
+    margin: 5px;
+
+}

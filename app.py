@@ -6,9 +6,12 @@ Authored by SC Siao
 
 from flask import *
 from flask_cors import CORS
-import user_api
-import attractions_api
-import booking_api
+
+import api.controller.attraction_api_controller as attraction_api_controller
+import api.controller.user_api_controller as user_api_controller
+import api.controller.booking_api_controller as booking_api_controller
+import api.controller.orders_api_controller as orders_api_controller
+
 
 app=Flask(
 	__name__,
@@ -17,9 +20,11 @@ app=Flask(
 )
 CORS(app)
 
-app.register_blueprint(user_api.user_api)
-app.register_blueprint(attractions_api.attractions_api)
-app.register_blueprint(booking_api.booking_api)
+app.register_blueprint(user_api_controller.user_api_controller)
+app.register_blueprint(attraction_api_controller.attractions_api_controller)
+app.register_blueprint(booking_api_controller.booking_api_controller)
+app.register_blueprint(orders_api_controller.orders_api_controller)
+
 # Pages
 @app.route("/")
 def index():

@@ -11,9 +11,7 @@ async function fetchAndCreatData(){
     return fetch(url).then((response)=>{
         return response.json();
     }).then((data)=>{
-        console.log("data",data)
         TPC_attraction_information = loadData(data)
-        console.log("TPC_attraction_information",TPC_attraction_information)
         attractionImg = createElement(TPC_attraction_information)
         return attractionImg
     })
@@ -21,7 +19,6 @@ async function fetchAndCreatData(){
 
 function loadData(data){
     data=data["data"];
-    console.log("data",data)    
     return data;
 }
 function createElement(TPC_attraction_information){
@@ -74,7 +71,6 @@ function createElement(TPC_attraction_information){
     bottomCircleCurrent.setAttribute("class","bottomCircleCurrent_0")
     bottomCircleCurrent.src = "../static/image/circle_current.png"
     bottomCircleBlock.appendChild(bottomCircleCurrent)
-    console.log("attractionImgLen",attractionImgLen)
     for (i=1;i<attractionImgLen;i++){
         let bottomCircleCurrent = document.createElement("img")
         bottomCircleCurrent.setAttribute("id",`bottomCircleCurrent_${i}`)
@@ -242,7 +238,6 @@ function showPrice(){
     let timeChosenResult = document.querySelector('input[name="timeChosen"]:checked');
     let guidePrice = document.getElementById('guidePrice');
     if (dataInputResult.value != 0 & timeChosenResult != null){
-        console.log("dataInputResult",dataInputResult.value)
         if (timeChosenResult.value == "morning"){
             guidePrice.innerHTML = "新台幣 2000 元"
             bookingTime = "morning"   
@@ -257,12 +252,10 @@ function showPrice(){
 }
 // Left and Right Bottom to change Image and Bottom
 function imageLeftChoose(){
-    console.log("Left")
     imageCount-=1
     bottomIconChange(imageCount)
 }
 function imageRightChoose(){
-    console.log("Right")    
     imageCount+=1
     bottomIconChange(imageCount)
 }
@@ -298,18 +291,14 @@ async function goToBooking(){
     await fetch(url,{
         method:"GET",
     }).then(function(response){
-        console.log("url",url)
         return response.json();
     }).then(function(data){
         if(data.data == null || data.error == true){
-            console.log("ff",signInButton)
             
             signInBlock();
-            console.log("ff2")
             // userStatusShow = "no"
         }
         else{
-            console.log(userStatusShow)
             let noDateInputAlarm = document.getElementById("noDateInputAlarm")
             let noTimeInputAlarm = document.getElementById("noTimeInputAlarm")
             noDateInputAlarm.style.display = "none"
@@ -317,15 +306,11 @@ async function goToBooking(){
             let attractionId = location.href.split("/").slice(-1)[0];
             let date = document.getElementById("dataInput").value;
             let time = bookingTime;
-            console.log("D")
-            console.log("date",date)
-            console.log("time",time)
             if (date == ""){
                 console.log("date",date)
                 noDateInputAlarm.style.display = "flex"
             }
             if (time == ""){
-                console.log("time",time)
                 noTimeInputAlarm.style.display = "flex"
             }
             else{
@@ -336,7 +321,6 @@ async function goToBooking(){
                     "time": time,
                     "price": price
                 }
-                console.log("data",data)
                 let url = `/api/booking`
                 fetch(url,{
                     method:"POST",
@@ -345,10 +329,8 @@ async function goToBooking(){
                         "Content-Type":"application/json"
                     })
                 }).then(function(response){
-                    // console.log("D2",data)
                     return response.json();
                 }).then(function(data){
-                    // console.log(data)
                 })  
                 window.location.href = "/booking"  
             }
@@ -357,12 +339,4 @@ async function goToBooking(){
     })
 
     
-}
-
-// test
-function test(){
-
-    let test = document.querySelector('input[name="timeChosen"]:checked');
-
-    console.log("test",timeChosenResult.value)
 }

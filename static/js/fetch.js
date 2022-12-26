@@ -1,9 +1,4 @@
-// WeHelp BootCamp Assignemt - Stage 2 taipei_day_trip -*- index fetch data js -*-
-// Update date: 2022/11/28
-// Authored by SC Siao
 
-// api URL
-// let keyword = document.getElementById("keyword").value;
 let page = 0;
 let keyword = "";
 let domainAndPort=""
@@ -167,7 +162,6 @@ function fetchAndCreatData(){
     }).then(function(data)
     {
         TPC_attraction_information=loadData(data);
-        console.log("Time")
         thisPageQty=createAtt(TPC_attraction_information);
         page = data["nextPage"];
         return thisPageQty;
@@ -279,9 +273,7 @@ async function searchAttraction(){
     page = 0
     keywordDiv = document.querySelector("#keyword");
     keyword = keywordDiv.value;
-    console.log("here")
     thisPageQty=await fetchAndCreatData();
-    console.log("thisPageQty",thisPageQty)
     // If no Data
     if (thisPageQty== 0){
         let mainFetchDataSelect = document.querySelector("#fetchData");
@@ -305,7 +297,6 @@ let target = document.querySelector("footer");
 let callback = (entries,observer) => {
     entries.forEach(entry => {
         if (page != null) {
-            console.log("page",page)
             fetchAndCreatData(); 
         } 
         else {
@@ -322,8 +313,6 @@ let sloganDivHeight = mainDIV.offsetHeight
 let windowHeight = window.innerHeight
 
 let rootMarginTop = (headerDivHeight+sloganDivHeight)-windowHeight
-
-console.log(rootMarginTop)
 
 const options = {
   root: null,

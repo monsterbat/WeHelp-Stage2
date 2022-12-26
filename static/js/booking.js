@@ -27,10 +27,8 @@ async function getBookingData(){
     return fetch(`/api/booking`,{
         method:"GET",
     }).then(function(response){
-        // console.log("url",url)
         return response.json();
     }).then(function(data){
-        // console.log(data)
         return data
     })
 }
@@ -39,10 +37,8 @@ async function getUserData(){
     return fetch(`/api/user/auth`,{
         method:"GET",
     }).then(function(response){
-        // console.log("url",url)
         return response.json();
     }).then(function(data){
-        // console.log(data)
         return data
     })
 }
@@ -50,7 +46,6 @@ async function getUserData(){
 async function createBookingData(){
     let bookingData = await getBookingData()
     let userData = await getUserData()
-    console.log(bookingData)
     if (bookingData.data != null){        
         let userNameShow = userData.data.name
         let userEmailShow = userData.data.email
@@ -61,11 +56,7 @@ async function createBookingData(){
         let bookingDateShow = bookingData.data.date
         let bookingTimeShow = bookingData.data.time
         let bookingPriceShow = bookingData.data.price
-        
-        console.log("bookingData",bookingData)
-        console.log("userData",userData.data.email)
-        console.log("bookingAddressShow",bookingData.data.attraction.address)
-        console.log(bookingTitle)
+
         bookingTitle.textContent = "您好，"+userNameShow+"，待預訂的行程如下："
         bookingImg.src = bookingImgShow
         bookingAttraction.textContent = "台北一日遊："+bookingNameShow
@@ -113,10 +104,7 @@ async function createBookingData(){
         let footerDivHeight = footer.offsetHeight
         let windowHeight = window.innerHeight
         footerNoScheduleDivHeight = windowHeight-(headerDivHeight+sloganDivHeight+footerDivHeight)
-        console.log(footerNoScheduleDivHeight)
         document.getElementById("footerNoSchedule").style.height = footerNoScheduleDivHeight+"px";
-
-        console.log("null") 
     }
     
 }
