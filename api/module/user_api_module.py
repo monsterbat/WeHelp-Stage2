@@ -8,7 +8,11 @@ import time
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt()
 
-jwt_key = "key"
+from dotenv import load_dotenv
+import os
+load_dotenv()
+jwt_key = os.getenv("jwt_key")
+# jwt_key = "key"
 def get_auth_get():
     token = request.cookies.get('token')
     # Judge with token or not

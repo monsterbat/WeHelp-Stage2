@@ -3,8 +3,11 @@ sys.path.append('api/function')
 import booking_api_module
 from MySQL_con import *
 from flask import *
-import jwt
-jwt_key = "key"
+# .env 
+from dotenv import load_dotenv
+import os
+load_dotenv()
+tappay_partner_key = os.getenv("tappay_partner_key")
 
 import datetime
 current_time_code = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
@@ -28,7 +31,7 @@ def get_orders_post(user_id):
 
     unite_id_len = str(user_id).rjust(7,"0")
     order_number = str(current_time_code+unite_id_len)
-    partner_key = "partner_eUauRMVnPUrBTAZqhOg9xuOfhkgrJRSnvt7Ulm4qXu8ZK7Y00XKcK5bt"
+    partner_key = tappay_partner_key
 
     url = "https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime"
     header= {
