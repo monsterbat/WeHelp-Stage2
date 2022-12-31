@@ -137,3 +137,77 @@ def get_user_post():
         "message": error_msg+"重複"
         })
         return errorr_message,400
+def get_auth_patch():
+    req_data=request.get_json()
+    userId = req_data["userId"]
+    newUserName = req_data["newUserName"]
+    newUserMail = req_data["newUserMail"]
+    oriUserPassword = req_data["oriUserPassword"]
+    newUserPassword = req_data["newUserPassword"]
+    
+    if newUserName != None:
+        sql_command="""
+        UPDATE user 
+        SET name= %s
+        WHERE id= %s;
+        """
+        value_input=(newUserName,userId)
+        insert_or_update_data(sql_command,value_input)
+        req_msg = jsonify({
+            "ok":True,
+            "message":"使用者名稱變更完成"
+            })
+        return req_msg
+
+    if newUserMail != None:
+        sql_command="""
+        UPDATE user 
+        SET email= %s
+        WHERE id= %s;
+        """
+        value_input=(newUserMail,userId)
+        insert_or_update_data(sql_command,value_input)
+
+        sign_in_data_email_only = {
+            "email":newUserMail
+        }
+        req_msg = jsonify({
+            "ok":True,
+            "message":"使用者信箱變更完成"
+            })
+        token = jwt.encode(sign_in_data_email_only, jwt_key, algorithm="HS256")
+        cookie_sustain_days = 1
+        req_msg.set_cookie(key="token", value=token, expires=time.time()+cookie_sustain_days*60*60*24)
+        return req_msg
+
+    if oriUserPassword != None:
+        sql_command="""
+        SELECT password
+        FROM user 
+        WHERE id=%s;
+        """       
+        value_input = (userId,)
+        user_check = query_data(sql_command,value_input)
+        passowrd_check = user_check[0]["password"]
+        passowrd_check = bcrypt.check_password_hash(passowrd_check, oriUserPassword)
+        if passowrd_check == True:
+            newUserPassword = bcrypt.generate_password_hash(password = newUserPassword)
+            sql_command="""
+            UPDATE user 
+            SET password= %s
+            WHERE id= %s;
+            """
+            value_input=(newUserPassword,userId)
+            insert_or_update_data(sql_command,value_input)
+            req_msg = jsonify({
+                "ok":True,
+                "message":"密碼更新完成"
+                })
+            return req_msg
+        if passowrd_check == False:
+            errorr_message = jsonify({
+            "error": True,
+            "message": "原始密碼輸入錯誤"
+            })
+            print("f")
+            return errorr_message

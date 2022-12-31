@@ -13,7 +13,7 @@ import datetime
 current_time_code = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
 
 import requests
-
+import pprint
 def get_orders_post(user_id):
     # Insert data
     orders_data = request.get_json()
@@ -23,8 +23,8 @@ def get_orders_post(user_id):
     attraction_name = orders_data["order"]["trip"]["attraction"]["name"]
     attraction_address = orders_data["order"]["trip"]["attraction"]["address"]
     attraction_image = orders_data["order"]["trip"]["attraction"]["image"]
-    date = orders_data["order"]["trip"]["date"]
-    time = orders_data["order"]["trip"]["time"]
+    order_date = orders_data["order"]["trip"]["date"]
+    order_time = orders_data["order"]["trip"]["time"]
     contact_name = orders_data["order"]["contact"]["name"]
     contact_email = orders_data["order"]["contact"]["email"]
     contact_phone = orders_data["order"]["contact"]["phone"]
@@ -59,10 +59,11 @@ def get_orders_post(user_id):
         pay_ststus = "已付款"
         pay_msg = "付款成功"    
         sql_command = """
-        INSERT INTO orders (user_id, order_number, pay_status,contact_phone,contact_name,contact_email)
-        VALUES (%s,%s,%s,%s,%s,%s);
+        INSERT INTO orders (user_id, order_number, pay_status,contact_phone,contact_name,contact_email,attraction_id,attraction_name,attraction_address,attraction_image,order_date,order_time)
+        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);
         """
-        value_input = (user_id,order_number,pay_ststus,contact_phone,contact_name,contact_email)
+        print(user_id,order_number,pay_ststus,contact_phone,contact_name,contact_email,attraction_id,attraction_name,attraction_address,attraction_image,order_date,order_time)
+        value_input = (user_id,order_number,pay_ststus,contact_phone,contact_name,contact_email,attraction_id,attraction_name,attraction_address,attraction_image,order_date,order_time)
         insert_or_update_data(sql_command,value_input)
 
         respon_msg = jsonify({
@@ -162,3 +163,16 @@ def get_orderNummber_get(orderNumber):
     booking_api_module.delete_booking_inf(user_id)
 
     return data
+
+def get_orderHistory_get(user_id):
+    sql_command="""
+    SELECT user_id, order_number, pay_status,contact_phone,contact_name,contact_email,attraction_id,attraction_name,attraction_address,attraction_image,order_date,order_time
+    FROM orders 
+    WHERE user_id=%s;
+    """
+    print("ee",user_id)
+    value_input = (user_id,)
+    orders_info = query_data(sql_command,value_input)
+    pprint.pprint(orders_info)
+    return orders_info
+
