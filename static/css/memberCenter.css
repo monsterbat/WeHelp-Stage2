@@ -424,3 +424,118 @@ main .finishBlockBorder .finishBlock .finishOk{
 main .finishBlockBorder .finishBlock .finishOk:hover{
     background: #508b9a; 
 }
+/* N0 Data */
+/* 1-3-2N */
+main .orderHistory .noHistoryDataBlock{
+    display: flex;
+    width :800px;
+    margin: 0px 0px 20px 100px;
+    padding: 10px;
+    background-color: #fdfdfd;
+}
+/* 1-3-2N-1 */
+main .orderHistory .noHistoryDataBlock .noHistoryData{
+    display: flex;
+    justify-content:center;
+    text-align: center;
+    align-items:center;
+    width: 100px;
+    height: inherit;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 34px;
+    color: #666666;
+    margin: auto;
+}
+
+@media(max-width: 1000px){
+    /* 1-C */
+    main .listChangeBlock{
+        width: 90%;
+    }
+    /* 1-1 */
+    main .userIconAndName{
+        width: 90%;
+        flex-direction: column;
+    }
+    /* 1-1-1 */
+    main .userIconAndName .userIconBlock{
+        left: 0;
+        margin-bottom: 30px;
+    }
+    /* 1-1-2 */
+    main .userIconAndName .userNameBlock{
+        left: 0;
+        right: 0;
+        width: 80%;
+    }
+    /* 1-1-2-1 newUserName */
+    main .userIconAndName .userNameBlock .newUserName{
+        width: 80%;
+    }
+    /* 1-2 */
+    main .userMailAndPassword{
+        width: 90%;
+    }
+    /* 1-2-N */
+    main .userMailAndPassword .userMailTitle,
+    main .userMailAndPassword .userPasswordTitle,
+    main .userMailAndPassword .userMailBlock,
+    main .userMailAndPassword .userPasswordBlock,
+    main .userMailAndPassword .userNewPasswordBlock,
+    main .userMailAndPassword .userNewPasswordCheckBlock{
+        width: 80%;
+        margin: auto;
+        margin-bottom: 20px;
+        padding: 0;
+    }
+    /* 1-3 */
+    main .orderHistory{
+        width :90%;
+    }
+    /* 1-3-2 */
+    main .orderHistory .orderHistoryList{
+        width: 80%;
+        flex-direction: column;
+        margin: auto;
+        margin-bottom: 20px;
+    }
+    /* 1-3-2-1 */
+    main .orderHistory .orderHistoryList .orderHistoryNumber{
+        margin: auto;
+    }
+    /* 1-3-2-2 */
+    main .orderHistory .orderHistoryList .orderHistoryImgBlock{
+        margin: auto;
+    }
+    main .orderHistory .orderHistoryList .orderHistoryImgBlock .orderHistoryImg{
+        margin: auto;
+        /* position: absolute; */
+        object-fit: cover;
+        width: 240px;
+        height: 180px;
+    }
+    /* 1-3-2-3 */
+    main .orderHistory .orderHistoryList .orderHistoryDetail{
+        margin: auto;
+        flex-direction: column;
+        justify-content: flex-start;
+
+    }
+
+
+    /* 1-3-2N */
+    main .orderHistory .noHistoryDataBlock{
+        width :80%;
+        margin: auto;
+        margin-bottom: 20px;
+    }
+    /* 1-3-2N-1 */
+    main .orderHistory .noHistoryDataBlock .noHistoryData{
+        width :80%;
+    }
+
+
+}

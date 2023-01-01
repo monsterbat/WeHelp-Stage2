@@ -59,7 +59,6 @@ def orderNumber(orderNumber):
 
 @orders_api_controller.route("/api/orders/history/<user_id>",methods=["GET"])
 def orderHistory(user_id):
-    print("Ch")
     token = request.cookies.get('token')
     
     # check token with login or not
@@ -70,7 +69,6 @@ def orderHistory(user_id):
         })
         return no_login_msg,403   
     try:
-        print("into")
         orderHistory = orders_api_module.get_orderHistory_get(user_id)
         return orderHistory,200
     except:

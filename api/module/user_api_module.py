@@ -209,5 +209,4 @@ def get_auth_patch():
             "error": True,
             "message": "原始密碼輸入錯誤"
             })
-            print("f")
             return errorr_message

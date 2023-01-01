@@ -10,11 +10,10 @@ load_dotenv()
 tappay_partner_key = os.getenv("tappay_partner_key")
 
 import datetime
-current_time_code = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
-
 import requests
-import pprint
+
 def get_orders_post(user_id):
+    current_time_code = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
     # Insert data
     orders_data = request.get_json()
     prime = orders_data["prime"]
@@ -62,7 +61,6 @@ def get_orders_post(user_id):
         INSERT INTO orders (user_id, order_number, pay_status,contact_phone,contact_name,contact_email,attraction_id,attraction_name,attraction_address,attraction_image,order_date,order_time)
         VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);
         """
-        print(user_id,order_number,pay_ststus,contact_phone,contact_name,contact_email,attraction_id,attraction_name,attraction_address,attraction_image,order_date,order_time)
         value_input = (user_id,order_number,pay_ststus,contact_phone,contact_name,contact_email,attraction_id,attraction_name,attraction_address,attraction_image,order_date,order_time)
         insert_or_update_data(sql_command,value_input)
 
@@ -170,9 +168,7 @@ def get_orderHistory_get(user_id):
     FROM orders 
     WHERE user_id=%s;
     """
-    print("ee",user_id)
     value_input = (user_id,)
     orders_info = query_data(sql_command,value_input)
-    pprint.pprint(orders_info)
     return orders_info
 

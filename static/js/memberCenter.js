@@ -190,7 +190,9 @@ async function createUserInf(){
     // createElement(orderHistory,"div","orderHistoryTitle","歷史訂單")
     // noHistoryData
     if(dataQty == 0){
-        createElement(orderHistory,"div","noHistoryData","無資料")
+        // 1-3-2N   NoData
+        createElement(orderHistory,"div","noHistoryDataBlock")
+        createElement(noHistoryDataBlock,"div","noHistoryData","無資料")
     }
     for (let i = 0; i<dataQty; i++){
         console.log("123")
